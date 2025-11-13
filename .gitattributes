@@ -1,12 +1,19 @@
 * text=auto
-*.js text eol=lf
-*.jsx text eol=lf
+
+# Source code
+*.js text eol=lf linguist-language=JavaScript
+*.jsx text eol=lf linguist-language=JavaScript
 *.json text eol=lf
 *.css text eol=lf
 *.html text eol=lf
 *.md text eol=lf
 
-# Treat all binary files as binary
+# Vendored/Generated
+node_modules/** linguist-vendored
+dist/** linguist-generated
+.next/** linguist-generated
+
+# Binary files
 *.png binary
 *.jpg binary
 *.jpeg binary
