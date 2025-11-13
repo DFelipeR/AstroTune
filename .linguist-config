@@ -1,0 +1,10 @@
+# Linguist configuration
+
+node_modules/** linguist-vendored
+dist/** linguist-generated
+
+# Mark source files explicitly
+
+src/\*_ linguist-detectable=true
+_.jsx linguist-language=JavaScript
+\*.js linguist-language=JavaScript
