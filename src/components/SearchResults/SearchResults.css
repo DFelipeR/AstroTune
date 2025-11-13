@@ -1,0 +1,57 @@
+.SearchResults {.SearchResults {
+
+  flex: 1;  width: 50%;
+
+  background: rgba(10, 10, 31, 0.9);  height: 950px;
+
+  border: 2px solid #00FFFF;  overflow-y: scroll;
+
+  border-radius: 12px;  padding: .88rem;
+
+  padding: 20px;  background-color: rgba(10, 10, 31, 0.9);
+
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);  box-shadow: 0 4px 2px 2px #000000, 0 0 20px rgba(0, 255, 255, 0.2);
+
+  max-height: 600px;  border: 1px solid rgba(0, 255, 255, 0.3);
+
+  overflow-y: auto;}
+
+}
+
+::-webkit-scrollbar {
+
+.SearchResults h2 {  width: 0px;
+
+  color: #00FFFF;  background: transparent;
+
+  font-family: 'Poppins', sans-serif;}
+
+  font-size: 20px;
+
+  margin-bottom: 16px;@media only screen and (max-width: 1020px) {
+
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);  .SearchResults {
+
+}    width: 90%;
+
+    margin-bottom: 2rem;
+
+.SearchResults::-webkit-scrollbar {  }
+
+  width: 8px;}
+
+}
+
+.SearchResults::-webkit-scrollbar-track {
+  background: rgba(0, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.SearchResults::-webkit-scrollbar-thumb {
+  background: #00FFFF;
+  border-radius: 10px;
+}
+
+.SearchResults::-webkit-scrollbar-thumb:hover {
+  background: #00DDFF;
+}

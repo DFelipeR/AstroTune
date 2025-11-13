@@ -1,0 +1,28 @@
+.TrackList {.TrackList {
+
+  display: flex;  width: 100%;
+
+  flex-direction: column;}
+
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.TrackList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.TrackList::-webkit-scrollbar-track {
+  background: rgba(0, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.TrackList::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+.TrackList::-webkit-scrollbar-thumb:hover {
+  background: #00FFFF;
+}
