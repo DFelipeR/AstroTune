@@ -5,19 +5,20 @@ const SearchBar = (props) => {
   const [term, setTerm] = useState("");
 
   const handleTermChange = (event) => {
-    setTerm(event.target.value);
+    const value = event.target.value;
+    setTerm(value);
+    // Búsqueda en tiempo real
+    props.onSearch(value);
   };
 
-  const handleSearch = () => {
-    if (term.trim()) {
-      props.onSearch(term);
-      setTerm("");
-    }
+  const handleClear = () => {
+    setTerm("");
+    props.onSearch("");
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
+    if (event.key === "Escape") {
+      handleClear();
     }
   };
 
@@ -30,9 +31,11 @@ const SearchBar = (props) => {
         onChange={handleTermChange}
         onKeyPress={handleKeyPress}
       />
-      <button className="SearchBar-button" onClick={handleSearch}>
-        Search
-      </button>
+      {term && (
+        <button className="SearchBar-clear" onClick={handleClear}>
+          ✕
+        </button>
+      )}
     </div>
   );
 };

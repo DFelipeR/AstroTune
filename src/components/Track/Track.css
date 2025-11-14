@@ -2,7 +2,7 @@
 .Track {
   display: flex;
   align-items: center;
-  justify-content: space-between;   /* Información a la izq, botón a la derecha */
+  justify-content: space-between;
   padding: 1rem;
   background: rgba(0, 255, 255, 0.05);
   border: 1px solid rgba(0, 255, 255, 0.2);
@@ -49,6 +49,31 @@
   transform: translateY(-2px);
 }
 
+/* Album Art */
+.Track-album-art {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #00FFFF 0%, #0099ff 100%);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.Track-album-art:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.album-note {
+  font-size: 1.8rem;
+  color: #000;
+}
+
 /* Información de la canción (nombre, artista, álbum) */
 .Track-information {
   flex: 1;                          /* Ocupar espacio disponible */
@@ -56,6 +81,7 @@
   flex-direction: column;
   gap: 0.3rem;
   transition: all 0.3s ease;
+  min-width: 0;
 }
 
 .Track:hover .Track-information {
@@ -69,6 +95,9 @@
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Track:hover .Track-information h3 {
@@ -81,6 +110,9 @@
   color: #B0B0B0;
   font-size: 0.85rem;
   transition: color 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Track:hover .Track-information p {
@@ -177,11 +209,11 @@
 
 .Track-action:hover {
   color: #0A0A1F;
-  transform: scale(1.1) rotate(90deg);            /* Crecer y rotar */
+  transform: scale(1.1) rotate(90deg);
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
 }
 
 /* Efecto al presionar */
 .Track-action:active {
-  transform: scale(0.95);           /* Reducir 5% */
+  transform: scale(0.95);
 }

@@ -49,6 +49,13 @@ class Track extends React.Component {
     return (
       <div className="Track">
         <div
+          className="Track-album-art"
+          onClick={this.showModal}
+          title="Click to view details"
+        >
+          <div className="album-note">♪</div>
+        </div>
+        <div
           className="Track-information"
           onClick={this.showModal}
           style={{ cursor: "pointer" }}

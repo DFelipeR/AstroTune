@@ -66,6 +66,17 @@ class App extends React.Component {
         this.state.playlistTracks
       );
     }
+
+    // Handle audio playback/pause
+    if (this.audioRef?.current) {
+      if (this.state.isPlaying && this.audioRef.current.paused) {
+        this.audioRef.current.play().catch(() => {
+          console.log("Auto-play prevented");
+        });
+      } else if (!this.state.isPlaying && !this.audioRef.current.paused) {
+        this.audioRef.current.pause();
+      }
+    }
   }
 
   updateSavedPlaylists() {
@@ -74,7 +85,7 @@ class App extends React.Component {
   }
 
   playTrack(track) {
-    this.setState({ currentTrack: track });
+    this.setState({ currentTrack: track, isPlaying: true });
   }
 
   stopTrack() {
@@ -197,6 +208,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        {/* Audio element - hidden but used for playback */}
+        <audio
+          ref={this.audioRef}
+          src={this.state.currentTrack?.previewUrl}
+          onEnded={() => {
+            this.setState({ isPlaying: false });
+          }}
+        />
+
         <div className="app-header">
           <h1>AstroTune</h1>
           <p>Your cyberpunk playlist manager</p>
