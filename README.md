@@ -1,509 +1,285 @@
-# 🎵 AstroTune# 🎵 AstroTune# Jammming
+# 🎵 AstroTune - Reproductor de Música Cyberpunk
 
-> Una aplicación moderna de Spotify para descubrir, buscar y crear playlists personalizadas con una interfaz futurista y tema cyberpunk.> Una aplicación moderna de Spotify para descubrir, buscar y crear playlists personalizadas con una interfaz futurista y tema cyberpunk.Small Vite + React project scaffold for the Jammming exercise.
+> Una aplicación moderna y futurista de reproducción de música con interfaz cyberpunk, reproductor de audio funcional y gestión de playlists personalizadas.
 
-**[🇬🇧 English Version](./README.en.md)** | **🇪🇸 Versión en Español**![Vite](https://img.shields.io/badge/Vite-7.x-purple?style=flat-square)How to run locally
-
-![Vite](https://img.shields.io/badge/Vite-7.x-purple?style=flat-square)![React](https://img.shields.io/badge/React-19.x-blue?style=flat-square)
-
+![Vite](https://img.shields.io/badge/Vite-7.x-purple?style=flat-square)
 ![React](https://img.shields.io/badge/React-19.x-blue?style=flat-square)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Activo-green?style=flat-square)
+![Deployment](https://img.shields.io/badge/Deploy-Surge%20CDN-blue?style=flat-square)
 
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square)![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square)1. Install dependencies
-
-![Status](https://img.shields.io/badge/Status-En%20Desarrollo-orange?style=flat-square)
-
-![Status](https://img.shields.io/badge/Status-En%20Desarrollo-orange?style=flat-square)
-
----
-
-````powershell
-
-## ✨ Características
-
----npm install
-
-- 🔍 **Búsqueda de Canciones** - Interfaz intuitiva para buscar y explorar canciones
-
-- 🎼 **Gestión de Playlists** - Crea playlists personalizadas con tus canciones favoritas```
-
-- ➕➖ **Agregar/Remover Canciones** - Controla fácilmente qué canciones incluir en tus playlists
-
-- ✏️ **Editar Nombre de Playlist** - Personaliza el nombre de tus playlists## ✨ Características
-
-- 💾 **Guardar a Spotify** - Sincroniza tus playlists con tu cuenta de Spotify
-
-- 🌌 **Diseño Cyberpunk** - Tema futurista con colores vibrantes y efectos visuales2. Run dev server
-
-- 🚀 **HMR (Hot Module Replacement)** - Desarrollo rápido con recarga en tiempo real
-
-- 🔍 **Búsqueda de Canciones** - Interfaz intuitiva para buscar y explorar canciones
+**[🇬🇧 English Version](./README.en.md)** | **🇪🇸 Versión en Español**
 
 ---
 
-- 🎼 **Gestión de Playlists** - Crea playlists personalizadas con tus canciones favoritas```powershell
+## ✨ Características Implementadas
 
-## 🎨 Paleta de Colores
-
-- ➕➖ **Agregar/Remover Canciones** - Controla fácilmente qué canciones incluir en tus playlistsnpm run dev
-
-| Color | Código | Uso |
-
-|-------|--------|-----|- ✏️ **Editar Nombre de Playlist** - Personaliza el nombre de tus playlists```
-
-| Fondo Oscuro | `#0A0A1F` | Fondo principal |
-
-| Cyan Eléctrico | `#00FFFF` | Acentos y botones |- 💾 **Guardar a Spotify** - Sincroniza tus playlists con tu cuenta de Spotify
-
-| Gris Claro | `#E0E0E0` | Texto principal |
-
-- 🌌 **Diseño Cyberpunk** - Tema futurista con colores vibrantes y efectos visuales3. Open http://localhost:5173/
+- ✅ **Reproductor de Audio Funcional** - Reproducción fluida con barra de progreso
+- ✅ **50 Canciones Precargadas** - Con tonos musicales diferentes (DO, RE, MI, FA, SOL, LA, SI)
+- ✅ **Control de Reproducción** - Play/Pause con animación suave
+- ✅ **Barra de Progreso Fluida** - Animación a 60 FPS con `requestAnimationFrame`
+- ✅ **Control de Volumen** - Slider con indicador visual en tiempo real
+- ✅ **Diseño Cyberpunk** - Tema futurista con colores neon (Cyan, Magenta, Negro)
+- ✅ **Visualizador de Audio** - Barras animadas que responden a la reproducción
+- ✅ **Información de Canción** - Nombre, artista, álbum y duración
+- ✅ **Interfaz Responsiva** - Optimizada para escritorio y tablets
+- ✅ **Deploy en Vivo** - Publicado en Surge CDN
 
 ---
 
-- 🚀 **HMR (Hot Module Replacement)** - Desarrollo rápido con recarga en tiempo real
+## 🚀 Publicación y Despliegue
 
-## 🛠️ Stack Tecnológico
+### 🌐 Acceso en Vivo
 
-Git
+**La aplicación está desplegada en:** https://astrotune-music.surge.sh
 
-- **Frontend Framework**: React 19.x
+### Instrucciones de Publicación en Surge
 
-- **Build Tool**: Vite 7.x---
+#### 1. **Instalar Surge**
 
-- **Lenguaje**: JavaScript (ES6+)
-
-- **Styling**: CSS3 (Component-scoped)This repository was initialized locally. To publish to GitHub:
-
-- **Package Manager**: npm
-
-- **Version Control**: Git + GitHub## 🎨 Paleta de Colores
-
-- **Desarrollo**: ESLint, Hot Module Replacement (HMR)
-
-1. Create a new empty repository on GitHub (do NOT add README on GitHub if you already have one locally).
-
----
-
-| Color | Código | Uso |2. Add the remote and push:
-
-## 📁 Estructura del Proyecto
-
-|-------|--------|-----|
-
-````
-
-AstroTune/| Fondo Oscuro | `#0A0A1F` | Fondo principal |```powershell
-
-├── public/
-
-│ ├── reset.css # Reset CSS global| Cyan Eléctrico | `#00FFFF` | Acentos y botones |git remote add origin https://github.com/<your-username>/<repo-name>.git
-
-│ └── favicon.ico # Ícono de la aplicación
-
-├── src/| Gris Claro | `#E0E0E0` | Texto principal |git branch -M main
-
-│ ├── components/
-
-│ │ ├── App/git push -u origin main
-
-│ │ │ ├── App.jsx
-
-│ │ │ └── App.css---```
-
-│ │ ├── SearchBar/
-
-│ │ │ ├── SearchBar.jsx## 🛠️ Stack TecnológicoIf git refuses to commit because user.name / user.email are not set, configure them locally:
-
-│ │ │ └── SearchBar.css
-
-│ │ ├── SearchResults/- **Frontend Framework**: React 19.x```powershell
-
-│ │ │ ├── SearchResults.jsx
-
-│ │ │ └── SearchResults.css- **Build Tool**: Vite 7.xgit config user.name "Your Name"
-
-│ │ ├── Playlist/
-
-│ │ │ ├── Playlist.jsx- **Lenguaje**: JavaScript (ES6+)git config user.email "you@example.com"
-
-│ │ │ └── Playlist.css
-
-│ │ ├── TrackList/- **Styling**: CSS3 (Component-scoped)```
-
-│ │ │ ├── TrackList.jsx
-
-│ │ │ └── TrackList.css- **Package Manager**: npm
-
-│ │ └── Track/
-
-│ │ ├── Track.jsx- **Version Control**: Git + GitHubNotes
-
-│ │ └── Track.css
-
-│ ├── assets/- **Desarrollo**: ESLint, Hot Module Replacement (HMR)
-
-│ ├── main.jsx # Punto de entrada
-
-│ ├── index.css # Estilos globales- `public/reset.css` currently contains a minimal reset. Adjust fonts and favicon in `index.html` as needed.
-
-│ └── App.jsx # Componente raíz
-
-├── vite.config.js # Configuración de Vite---- Consider removing large binary assets from the repo or storing them in `assets` and tracking only what you need.# React + Vite
-
-├── eslint.config.js # Configuración de ESLint
-
-├── index.html # HTML principal## 📁 Estructura del ProyectoThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-├── package.json
-
-├── package-lock.json```Currently, two official plugins are available:
-
-└── README.md # Este archivo
-
-````AstroTune/
-
-
-
----├── public/- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-
-
-
-## 🚀 Inicio Rápido│   ├── reset.css           # Reset CSS global- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-
-
-### Requisitos Previos│   └── favicon.ico         # Ícono de la aplicación
-
-- Node.js (v16 o superior)
-
-- npm (v7 o superior)├── src/## React Compiler
-
-
-
-### Instalación│   ├── components/
-
-
-
-1. **Clona el repositorio**│   │   ├── App/The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-   ```powershell
-
-   git clone https://github.com/DFelipeR/AstroTune.git│   │   │   ├── App.jsx
-
-   cd AstroTune
-
-   ```│   │   │   └── App.css## Expanding the ESLint configuration
-
-
-
-2. **Instala las dependencias**│   │   ├── SearchBar/
-
-   ```powershell
-
-   npm install│   │   │   ├── SearchBar.jsxIf you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-````
-
-│ │ │ └── SearchBar.css
-
-3. **Inicia el servidor de desarrollo**│ │ ├── SearchResults/
-
-   ````powershell│ │   │   ├── SearchResults.jsx
-
-   npm run dev│   │   │   └── SearchResults.css
-
-   ```│   │   ├── Playlist/
-   ````
-
-│ │ │ ├── Playlist.jsx
-
-4. **Abre tu navegador**│ │ │ └── Playlist.css
-
-   ````│ │   ├── TrackList/
-
-   http://localhost:5173/│   │   │   ├── TrackList.jsx
-
-   ```│   │   │   └── TrackList.css
-   ````
-
-│ │ └── Track/
-
----│ │ ├── Track.jsx
-
-│ │ └── Track.css
-
-## 📝 Scripts Disponibles│ ├── assets/
-
-│ ├── main.jsx # Punto de entrada
-
-````powershell│ ├── index.css           # Estilos globales
-
-# Inicia el servidor de desarrollo con HMR│   └── App.jsx             # Componente raíz
-
-npm run dev├── vite.config.js          # Configuración de Vite
-
-├── eslint.config.js        # Configuración de ESLint
-
-# Compila el proyecto para producción├── index.html              # HTML principal
-
-npm build├── package.json
-
-├── package-lock.json
-
-# Vista previa de la compilación de producción└── README.md               # Este archivo
-
-npm preview```
-
-
-
-# Ejecuta ESLint para verificar la calidad del código---
-
-npm lint
-
-```## 🚀 Inicio Rápido
-
-
-
----### Requisitos Previos
-
-
-
-## 🧩 Arquitectura de Componentes- Node.js (v16 o superior)
-
-- npm (v7 o superior)
-
-### Jerarquía de Componentes
-
-### Instalación
-
-````
-
-App (Componente Raíz)1. **Clona el repositorio**
-
-├── SearchBar (Buscar canciones)
-
-├── SearchResults (Mostrar resultados) ```powershell
-
-│ └── TrackList git clone https://github.com/DFelipeR/AstroTune.git
-
-│ └── Track (+ botón) cd AstroTune
-
-└── Playlist (Mi Playlist) ```
-
-    ├── Input (Nombre de playlist)
-
-    ├── TrackList2. **Instala las dependencias**
-
-    │   └── Track (- botón)
-
-    └── Botón Guardar   ```powershell
-
-```npm install
-
+```powershell
+npm install --global surge
 ```
 
-### Flujo de Props
+#### 2. **Hacer build del proyecto**
+
+```powershell
+npm run build
+```
+
+#### 3. **Desplegar a Surge**
+
+```powershell
+cd dist
+surge --project . --domain astrotune-music.surge.sh
+```
+
+#### 4. **Verificar despliegue**
+
+```
+✅ Production ............................................................... astrotune-music.surge.sh
+Success! - Published to astrotune-music.surge.sh
+```
+
+### Desplegar en Otros Servicios
+
+**Vercel:**
+
+```powershell
+vercel --prod
+```
+
+**Netlify:**
+
+```powershell
+netlify deploy --prod --dir=dist
+```
+
+**GitHub Pages:**
+
+```powershell
+npm run build
+# Configurar en GitHub: Settings > Pages > Deploy from branch > main/docs
+```
+
+---
+
+## 🛠️ Instalación Local
+
+### Requisitos Previos
+
+- Node.js (v16 o superior)
+- npm (v7 o superior)
+- Git
+
+### Pasos de Instalación
+
+1. **Clona el repositorio**
+
+```powershell
+git clone https://github.com/DFelipeR/AstroTune.git
+cd AstroTune
+```
+
+2. **Instala las dependencias**
+
+```powershell
+npm install
+```
 
 3. **Inicia el servidor de desarrollo**
 
-- **App.jsx**: Gestiona el estado global (searchResults, playlistName, playlistTracks)
+```powershell
+npm run dev
+```
 
-- **SearchBar**: Captura entrada del usuario, comunica búsquedas a App ```powershell
+4. **Abre en el navegador**
 
-- **SearchResults**: Muestra resultados, permite agregar canciones npm run dev
-
-- **Playlist**: Muestra playlist actual, permite editar nombre y remover canciones ```
-
-- **TrackList**: Renderiza lista de tracks
-
-- **Track**: Componente individual de canción con botones de control4. **Abre tu navegador**
-
-  ```
-
-  ```
-
---- http://localhost:5173/
-
-````
-
-## 🔗 Métodos Principales
-
----
-
-| Método | Descripción |
-
-|--------|------------|## 📝 Scripts Disponibles
-
-| `addTrack(track)` | Agrega una canción a la playlist |
-
-| `removeTrack(track)` | Remueve una canción de la playlist |```powershell
-
-| `updatePlaylistName(name)` | Actualiza el nombre de la playlist |# Inicia el servidor de desarrollo con HMR
-
-| `search(term)` | Busca canciones (Spotify API) |npm run dev
-
-| `savePlaylist()` | Guarda la playlist en Spotify |
-
-# Compila el proyecto para producción
-
----npm build
-
-
-
-## 📚 Tecnologías y Conceptos# Vista previa de la compilación de producción
-
-npm preview
-
-### React Hooks & Conceptos
-
-- ✅ **useState**: Gestión de estado en componentes funcionales# Ejecuta ESLint para verificar la calidad del código
-
-- ✅ **Props**: Comunicación entre componentesnpm lint
-
-- ✅ **Event Handling**: Manejo de eventos del usuario```
-
-- ✅ **Component Lifecycle**: Ciclo de vida de componentes clase
-
----
-
-### CSS Moderno
-
-- ✅ **Flexbox**: Layouts responsivos## 🧩 Arquitectura de Componentes
-
-- ✅ **Gradientes**: Efectos visuales modernos
-
-- ✅ **Transiciones**: Animaciones suaves### Jerarquía de Componentes
-
-- ✅ **Box Shadows**: Efectos de profundidad con glow
-
-````
-
----App (Componente Raíz)
-
-├── SearchBar (Buscar canciones)
-
-## 🎯 Próximos Pasos (Roadmap)├── SearchResults (Mostrar resultados)
-
-│ └── TrackList
-
-- [ ] **Integración Spotify API**: Conectar con API de Spotify para búsqueda real│ └── Track (+ botón)
-
-- [ ] **Autenticación**: Sistema de login con Spotify OAuth└── Playlist (Mi Playlist)
-
-- [ ] **Persistencia de Datos**: Guardar playlists localmente ├── Input (Nombre de playlist)
-
-- [ ] **Responsive Design**: Optimizar para dispositivos móviles ├── TrackList
-
-- [ ] **Temas**: Selector de temas (claro/oscuro) │ └── Track (- botón)
-
-- [ ] **Tests**: Agregar pruebas unitarias con Jest/Vitest └── Botón Guardar
-
+```
+http://localhost:5173/
 ```
 
 ---
 
-### Flujo de Props
+## 📝 Scripts Disponibles
 
-## 📸 Capturas de Pantalla
+```powershell
+# Inicia el servidor de desarrollo con HMR
+npm run dev
 
-- **App.jsx**: Gestiona el estado global (searchResults, playlistName, playlistTracks)
+# Compila el proyecto para producción
+npm run build
 
-*[Próximamente se agregarán capturas de pantalla del diseño cyberpunk]*- **SearchBar**: Captura entrada del usuario, comunica búsquedas a App
+# Vista previa de la compilación
+npm run preview
 
-- **SearchResults**: Muestra resultados, permite agregar canciones
-
----- **Playlist**: Muestra playlist actual, permite editar nombre y remover canciones
-
-- **TrackList**: Renderiza lista de tracks
-
-## 🤝 Contribuciones- **Track**: Componente individual de canción con botones de control
-
-
-
-Las contribuciones son bienvenidas. Para cambios mayores:---
-
-
-
-1. Fork el proyecto## 🔗 Métodos Principales
-
-2. Crea una rama para tu feature (`git checkout -b feature/amazing-feature`)
-
-3. Commit tus cambios (`git commit -m 'Add some amazing feature'`)| Método                     | Descripción                        |
-
-4. Push a la rama (`git push origin feature/amazing-feature`)| -------------------------- | ---------------------------------- |
-
-5. Abre un Pull Request| `addTrack(track)`          | Agrega una canción a la playlist   |
-
-| `removeTrack(track)`       | Remueve una canción de la playlist |
-
----| `updatePlaylistName(name)` | Actualiza el nombre de la playlist |
-
-| `search(term)`             | Busca canciones (Spotify API)      |
-
-## 📄 Licencia| `savePlaylist()`           | Guarda la playlist en Spotify      |
-
-
-
-Este proyecto está bajo la licencia **MIT**. Ver el archivo `LICENSE` para más detalles.---
-
-
-
----## 📚 Tecnologías y Conceptos
-
-
-
-## 👨‍💻 Autor### React Hooks & Conceptos
-
-
-
-**DFelipeR**- ✅ **useState**: Gestión de estado en componentes funcionales
-
-- ✅ **Props**: Comunicación entre componentes
-
-- GitHub: [@DFelipeR](https://github.com/DFelipeR)- ✅ **Event Handling**: Manejo de eventos del usuario
-
-- LinkedIn: [Felipe Rodriguez](https://linkedin.com/in/dfeliper)- ✅ **Component Lifecycle**: Ciclo de vida de componentes clase
-
-
-
----### CSS Moderno
-
-
-
-## 📞 Soporte- ✅ **Flexbox**: Layouts responsivos
-
-- ✅ **Gradientes**: Efectos visuales modernos
-
-¿Preguntas o sugerencias? Abre un issue en el repositorio o contáctame directamente.- ✅ **Transiciones**: Animaciones suaves
-
-- ✅ **Box Shadows**: Efectos de profundidad con glow
+# Verificar calidad del código
+npm run lint
+```
 
 ---
 
+## 🎨 Diseño Visual
+
+### Paleta de Colores Cyberpunk
+
+| Color          | Código    | Uso                    |
+| -------------- | --------- | ---------------------- |
+| Fondo Oscuro   | `#0A0A1F` | Fondo principal        |
+| Cyan Eléctrico | `#00FFFF` | Acentos, botones, glow |
+| Magenta Oscuro | `#2d1b4e` | Gradientes de fondo    |
+| Gris Claro     | `#E0E0E0` | Texto principal        |
+| Gris Medio     | `#94a3b8` | Texto secundario       |
+
+### Efectos Visuales
+
+- ✨ Glow neon en botones y bordes
+- 🎬 Animaciones suaves con `requestAnimationFrame`
+- 🎯 Transiciones fluidas en controles
+- 📊 Visualizador de audio animado
+
 ---
 
-<div align="center">
+## 📁 Estructura del Proyecto
 
-## 🎯 Próximos Pasos (Roadmap)
-
-**⭐ Si te gustó este proyecto, no olvides dejar una estrella en GitHub! ⭐**
-
-- [ ] **Integración Spotify API**: Conectar con API de Spotify para búsqueda real
-
-Hecho con ❤️ y mucho ☕ por DFelipeR- [ ] **Autenticación**: Sistema de login con Spotify OAuth
-
-- [ ] **Persistencia de Datos**: Guardar playlists localmente
-
-</div>- [ ] **Responsive Design**: Optimizar para dispositivos móviles
-
-- [ ] **Temas**: Selector de temas (claro/oscuro)
-- [ ] **Tests**: Agregar pruebas unitarias con Jest/Vitest
+```
+AstroTune/
+├── public/
+│   ├── audio/                    # Archivos WAV de canciones (50 archivos)
+│   ├── reset.css                 # Reset CSS global
+│   └── favicon.ico               # Ícono de la aplicación
+├── src/
+│   ├── components/
+│   │   ├── App/                  # Componente principal
+│   │   │   ├── App.jsx
+│   │   │   └── App.css
+│   │   ├── AudioPlayer/          # Reproductor de audio
+│   │   │   ├── AudioPlayer.jsx   # Control de reproducción
+│   │   │   └── AudioPlayer.css   # Estilos cyberpunk
+│   │   ├── SearchBar/
+│   │   ├── SearchResults/
+│   │   ├── Playlist/
+│   │   ├── TrackList/
+│   │   └── Track/
+│   ├── data/
+│   │   └── mockTracks.js         # Catálogo de 50 canciones
+│   ├── main.jsx                  # Punto de entrada
+│   └── index.css                 # Estilos globales
+├── vite.config.js                # Configuración de Vite
+├── index.html                    # HTML principal
+├── package.json
+├── create_multi_wav.ps1          # Script para generar archivos WAV
+└── README.md                     # Este archivo
+```
 
 ---
 
-## 📸 Capturas de Pantalla
+## 🎯 Mejoras Pendientes
 
-_[Próximamente se agregarán capturas de pantalla del diseño cyberpunk]_
+### 🔴 Críticas (Deben implementarse)
+
+- [ ] **Integración Spotify API** - Búsqueda de canciones reales en Spotify
+- [ ] **Autenticación OAuth** - Login con Spotify para sincronizar playlists
+- [ ] **Persistencia de Datos** - Guardar playlists en base de datos
+- [ ] **Reproducción Real** - Reemplazar tonos WAV por canciones MP3 reales
+
+### 🟡 Importantes (Mejoran UX)
+
+- [ ] **Responsive Mobile** - Optimizar interfaz para smartphones
+- [ ] **Search Funcional** - Buscar en catálogo de 50 canciones
+- [ ] **Playlists** - Crear, editar y eliminar playlists
+- [ ] **Agregar a Cola** - Sistema de cola de reproducción
+- [ ] **Historial** - Guardar canciones escuchadas recientemente
+
+### 🟢 Opcionales (Mejoras futuras)
+
+- [ ] **Temas Intercambiables** - Selector claro/oscuro/cyberpunk
+- [ ] **Ecualizador** - Control de bajos, medios y agudos
+- [ ] **Letras** - Mostrar sincronización de letras
+- [ ] **Recomendaciones** - IA para sugerir canciones
+- [ ] **Social** - Compartir playlists y canciones
+- [ ] **Tests** - Pruebas unitarias con Jest/Vitest
+- [ ] **PWA** - Progressive Web App (funciona offline)
+
+---
+
+## 🛠️ Stack Tecnológico
+
+### Frontend
+
+- **Framework**: React 19.x
+- **Build Tool**: Vite 7.x
+- **Lenguaje**: JavaScript (ES6+)
+- **Styling**: CSS3 (Scoped por componente)
+
+### APIs & Librerías
+
+- **HTML5 Audio API** - Reproducción de audio
+- **Web Audio API** - Análisis de audio (visualizador)
+- **requestAnimationFrame** - Animaciones suaves a 60 FPS
+
+### DevOps
+
+- **Package Manager**: npm
+- **Version Control**: Git + GitHub
+- **Deployment**: Surge CDN
+- **Development**: ESLint + HMR (Hot Module Replacement)
+
+---
+
+## 🔊 Generación de Audio
+
+### Archivos WAV
+
+Los 50 archivos WAV se generan usando **PowerShell** con notas musicales:
+
+- **Frecuencias**: C4 (262 Hz) a C5 (523 Hz) en ciclo
+- **Duración**: 10 segundos cada uno
+- **Formato**: 44.1 kHz, 16-bit, Mono
+- **Tamaño Total**: ~43 MB
+
+### Script de Generación
+
+```powershell
+powershell -ExecutionPolicy Bypass -File create_multi_wav.ps1
+```
+
+Este script genera automáticamente 50 archivos WAV con diferentes notas musicales en la carpeta `public/audio/`.
+
+---
+
+## 📊 Estadísticas del Proyecto
+
+| Métrica               | Valor                          |
+| --------------------- | ------------------------------ |
+| Canciones Precargadas | 50                             |
+| Duración por Canción  | 10 segundos                    |
+| Componentes React     | 7                              |
+| Archivos CSS          | 7                              |
+| Tamaño Bundle JS      | 210 kB (65 kB gzipped)         |
+| Tamaño CSS            | 9.42 kB (2.22 kB gzipped)      |
+| Deployment Size       | 43.2 MB (incluyendo audio)     |
+| FPS del Reproductor   | 60 (con requestAnimationFrame) |
 
 ---
 
@@ -511,11 +287,11 @@ _[Próximamente se agregarán capturas de pantalla del diseño cyberpunk]_
 
 Las contribuciones son bienvenidas. Para cambios mayores:
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/amazing-feature`)
-3. Commit tus cambios (`git commit -m 'Add some amazing feature'`)
-4. Push a la rama (`git push origin feature/amazing-feature`)
-5. Abre un Pull Request
+1. **Fork** el proyecto
+2. **Crea una rama** para tu feature (`git checkout -b feature/amazing-feature`)
+3. **Commit** tus cambios (`git commit -m 'Add some amazing feature'`)
+4. **Push** a la rama (`git push origin feature/amazing-feature`)
+5. **Abre un Pull Request**
 
 ---
 
@@ -531,12 +307,16 @@ Este proyecto está bajo la licencia **MIT**. Ver el archivo `LICENSE` para más
 
 - GitHub: [@DFelipeR](https://github.com/DFelipeR)
 - LinkedIn: [Felipe Rodriguez](https://linkedin.com/in/dfeliper)
+- Portafolio: [dfeliper.dev](https://dfeliper.dev)
 
 ---
 
 ## 📞 Soporte
 
-¿Preguntas o sugerencias? Abre un issue en el repositorio o contáctame directamente.
+¿Preguntas o sugerencias?
+
+- 📧 Abre un [issue en GitHub](https://github.com/DFelipeR/AstroTune/issues)
+- 💬 Contáctame directamente en mis redes
 
 ---
 
@@ -546,5 +326,6 @@ Este proyecto está bajo la licencia **MIT**. Ver el archivo `LICENSE` para más
 
 Hecho con ❤️ y mucho ☕ por DFelipeR
 
+**[🚀 Ver en Vivo](https://astrotune-music.surge.sh)**
+
 </div>
-```

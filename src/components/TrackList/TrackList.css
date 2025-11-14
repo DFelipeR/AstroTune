@@ -1,26 +1,25 @@
-.TrackList {.TrackList {
-
-  display: flex;  width: 100%;
-
-  flex-direction: column;}
-
-  gap: 10px;
+/* Contenedor de la lista de canciones */
+.TrackList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;                      /* Espacio entre canciones */
   flex: 1;
-  overflow-y: auto;
+  overflow-y: auto;                 /* Scroll si hay muchas */
 }
 
+/* Personalizar scrollbar de TrackList */
 .TrackList::-webkit-scrollbar {
   width: 6px;
 }
 
 .TrackList::-webkit-scrollbar-track {
   background: rgba(0, 255, 255, 0.05);
-  border-radius: 10px;
 }
 
 .TrackList::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 255, 0.5);
-  border-radius: 10px;
+  background: rgba(0, 255, 255, 0.4);
+  border-radius: 5px;
 }
 
 .TrackList::-webkit-scrollbar-thumb:hover {

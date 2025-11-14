@@ -1,6 +1,6 @@
-﻿import React from 'react';
-import './Playlist.css';
-import TrackList from '../TrackList/TrackList';
+﻿import React from "react";
+import "./Playlist.css";
+import TrackList from "../TrackList/TrackList";
 
 const Playlist = (props) => {
   const handleNameChange = (event) => {
@@ -17,10 +17,11 @@ const Playlist = (props) => {
       <TrackList
         tracks={props.playlistTracks}
         onRemove={props.onRemove}
+        onPlay={props.onPlay}
         isRemoval={true}
       />
       <button className="Playlist-save" onClick={props.onSave}>
-        Guardar en Spotify
+        Save to Spotify
       </button>
     </div>
   );

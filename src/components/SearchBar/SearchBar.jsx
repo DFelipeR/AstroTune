@@ -1,8 +1,8 @@
-﻿import React, { useState } from 'react';
-import './SearchBar.css';
+﻿import React, { useState } from "react";
+import "./SearchBar.css";
 
 const SearchBar = (props) => {
-  const [term, setTerm] = useState('');
+  const [term, setTerm] = useState("");
 
   const handleTermChange = (event) => {
     setTerm(event.target.value);
@@ -11,12 +11,12 @@ const SearchBar = (props) => {
   const handleSearch = () => {
     if (term.trim()) {
       props.onSearch(term);
-      setTerm('');
+      setTerm("");
     }
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSearch();
     }
   };
@@ -25,13 +25,13 @@ const SearchBar = (props) => {
     <div className="SearchBar">
       <input
         className="SearchBar-input"
-        placeholder="Busca una canciÃ³n, artista o Ã¡lbum..."
+        placeholder="Search a song, artist or album..."
         value={term}
         onChange={handleTermChange}
         onKeyPress={handleKeyPress}
       />
       <button className="SearchBar-button" onClick={handleSearch}>
-        Buscar
+        Search
       </button>
     </div>
   );

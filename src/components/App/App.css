@@ -1,0 +1,53 @@
+/* El contenedor principal de toda la aplicación */
+.App {
+  font-family: Inter, -apple-system, 'Segoe UI', Roboto;
+  color: #E0E0E0;                    /* Texto gris claro */
+  background: linear-gradient(
+    135deg,                           /* Ángulo del gradiente */
+    #0A0A1F 0%,                       /* Empieza: Negro profundo */
+    #1a1a3f 100%                      /* Termina: Azul oscuro */
+  );
+  min-height: 100vh;                 /* Llenar pantalla completa */
+}
+
+/* El header con título */
+.app-header {
+  text-align: center;                /* Centrar texto */
+  padding: 2rem;                     /* Espacio interior */
+  border-bottom: 2px solid rgba(0, 255, 255, 0.3); /* Línea cyan abajo */
+  background: rgba(0, 0, 0, 0.5);   /* Fondo semi-transparente */
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 3rem;                  /* Título grande */
+  color: #00FFFF;                   /* Cyan brillante */
+  text-shadow: 0 0 30px rgba(0, 255, 255, 0.6); /* Efecto de brillo */
+  letter-spacing: 3px;              /* Espaciar letras */
+}
+
+.app-header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+  color: #94a3b8;                   /* Gris azulado */
+}
+
+/* Contenedor de contenido (SearchBar + Content) */
+.app-container {
+  padding: 2rem;
+}
+
+/* El layout con SearchResults y Playlist lado a lado */
+.app-content {
+  display: flex;                    /* Lado a lado */
+  gap: 2rem;                        /* Espacio entre elementos */
+  align-items: flex-start;          /* Alinear desde arriba */
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 1200px) {
+  .app-content {
+    flex-direction: column;          /* Uno arriba del otro */
+    gap: 2rem;
+  }
+}
