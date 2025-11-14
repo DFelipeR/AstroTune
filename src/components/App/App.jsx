@@ -29,6 +29,7 @@ class App extends React.Component {
     this.stopTrack = this.stopTrack.bind(this);
     this.loadPlaylist = this.loadPlaylist.bind(this);
     this.deletePlaylist = this.deletePlaylist.bind(this);
+    this.newPlaylist = this.newPlaylist.bind(this);
   }
 
   componentDidMount() {
@@ -161,6 +162,12 @@ class App extends React.Component {
     }
   }
 
+  newPlaylist() {
+    this.setState({
+      playlistName: "New Playlist",
+      playlistTracks: [],
+    });
+  }
   render() {
     return (
       <div className="App">
@@ -181,7 +188,12 @@ class App extends React.Component {
 
           {this.state.savedPlaylists.length > 0 && (
             <div className="saved-playlists">
-              <h3>Your Playlists</h3>
+              <div className="playlists-header">
+                <h3>Your Playlists</h3>
+                <button className="new-playlist-btn" onClick={this.newPlaylist}>
+                  New Playlist
+                </button>
+              </div>
               <div className="playlist-buttons">
                 {this.state.savedPlaylists.map((name) => (
                   <div key={name} className="playlist-button-group">

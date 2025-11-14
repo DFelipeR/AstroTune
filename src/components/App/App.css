@@ -47,10 +47,37 @@
   backdrop-filter: blur(10px);
 }
 
-.saved-playlists h3 {
-  margin: 0 0 1rem 0;
+.playlists-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.playlists-header h3 {
+  margin: 0;
   color: #00FFFF;
   font-size: 1.1rem;
+}
+
+.new-playlist-btn {
+  background: linear-gradient(135deg, rgba(0, 200, 100, 0.3), rgba(0, 150, 100, 0.3));
+  border: 1px solid rgba(0, 200, 100, 0.6);
+  color: #00FF99;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.new-playlist-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 200, 100, 0.5), rgba(0, 150, 100, 0.5));
+  box-shadow: 0 0 15px rgba(0, 200, 100, 0.5);
+  border-color: rgba(0, 255, 150, 0.8);
 }
 
 .playlist-buttons {
