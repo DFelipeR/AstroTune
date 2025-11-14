@@ -2,7 +2,12 @@ import React from "react";
 import "./TrackModal.css";
 
 const TrackModal = ({ track, isOpen, onClose, onPlay }) => {
-  if (!isOpen || !track) return null;
+  if (!isOpen || !track) {
+    console.log("Modal no se abre:", { isOpen, track });
+    return null;
+  }
+
+  console.log("Modal renderizado:", track);
 
   return (
     <div className="track-modal-overlay" onClick={onClose}>

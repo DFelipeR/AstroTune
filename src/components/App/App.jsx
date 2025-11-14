@@ -198,10 +198,12 @@ class App extends React.Component {
   }
 
   showTrackModal(track) {
+    console.log("Modal abierto:", track);
     this.setState({ selectedTrackForModal: track });
   }
 
   closeTrackModal() {
+    console.log("Modal cerrado");
     this.setState({ selectedTrackForModal: null });
   }
 
