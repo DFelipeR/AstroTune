@@ -9,13 +9,44 @@
   border-radius: 8px;
   transition: all 0.3s ease;
   gap: 10px;
+  animation: trackSlideIn 0.4s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes trackSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pseudo elemento para efecto de brillo */
+.Track::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 /* Efecto cuando pasas mouse sobre la canción */
+.Track:hover::before {
+  left: 100%;
+}
+
 .Track:hover {
   background: rgba(0, 255, 255, 0.15);
   border-color: #00FFFF;
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 /* Información de la canción (nombre, artista, álbum) */
@@ -24,6 +55,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  transition: all 0.3s ease;
+}
+
+.Track:hover .Track-information {
+  color: #00FFFF;
 }
 
 /* Nombre de la canción */
@@ -32,6 +68,11 @@
   color: #00FFFF;
   font-size: 1rem;
   font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.Track:hover .Track-information h3 {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
 /* Artista y álbum */
@@ -39,6 +80,11 @@
   margin: 0;
   color: #B0B0B0;
   font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.Track:hover .Track-information p {
+  color: #94a3b8;
 }
 
 /* El botón play ▶ */
@@ -56,10 +102,30 @@
   justify-content: center;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.Track-play::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: #00FF00;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+  z-index: -1;
+}
+
+.Track-play:hover::before {
+  width: 40px;
+  height: 40px;
 }
 
 .Track-play:hover {
-  background: #00FF00;
   color: #0A0A1F;
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
@@ -85,13 +151,33 @@
   justify-content: center;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* Efecto al pasar mouse al botón */
-.Track-action:hover {
+.Track-action::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
   background: #00FFFF;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+  z-index: -1;
+}
+
+.Track-action:hover::before {
+  width: 45px;
+  height: 45px;
+}
+
+.Track-action:hover {
   color: #0A0A1F;
-  transform: scale(1.1);            /* Crecer 10% */
+  transform: scale(1.1) rotate(90deg);            /* Crecer y rotar */
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
 }
 

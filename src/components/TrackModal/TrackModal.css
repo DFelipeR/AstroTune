@@ -1,0 +1,222 @@
+/* Modal Overlay */
+.track-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* Modal Container */
+.track-modal {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a3f 100%);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  box-shadow: 
+    0 8px 32px rgba(0, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Close Button */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #00FFFF;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0, 255, 255, 0.2);
+  border-color: rgba(0, 255, 255, 0.6);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* Album Art */
+.modal-album-art {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, #00FFFF 0%, #0099ff 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.album-icon {
+  font-size: 4rem;
+  color: #000;
+}
+
+/* Modal Content */
+.modal-content {
+  text-align: center;
+}
+
+.modal-track-name {
+  margin: 0 0 0.5rem;
+  font-size: 1.8rem;
+  color: #00FFFF;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  animation: fadeInDown 0.5s ease-out 0.1s both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-track-artist {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  color: #94a3b8;
+  animation: fadeInDown 0.5s ease-out 0.15s both;
+}
+
+.modal-track-album {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: #64748b;
+  font-style: italic;
+  animation: fadeInDown 0.5s ease-out 0.2s both;
+}
+
+/* Duration */
+.modal-duration {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(0, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  animation: fadeInDown 0.5s ease-out 0.25s both;
+}
+
+.duration-label {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.duration-value {
+  color: #00FFFF;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Play Button */
+.modal-play-btn {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 100, 200, 0.2));
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  color: #00FFFF;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: fadeInDown 0.5s ease-out 0.3s both;
+}
+
+.modal-play-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(0, 100, 200, 0.3));
+  border-color: rgba(0, 255, 255, 0.8);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.4),
+    inset 0 0 10px rgba(0, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.modal-play-btn:active {
+  transform: translateY(0px);
+  box-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.2),
+    inset 0 0 5px rgba(0, 255, 255, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .track-modal {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .modal-track-name {
+    font-size: 1.5rem;
+  }
+
+  .modal-album-art {
+    width: 120px;
+    height: 120px;
+  }
+
+  .album-icon {
+    font-size: 3rem;
+  }
+}

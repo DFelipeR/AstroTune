@@ -19,6 +19,7 @@ const Playlist = (props) => {
         tracks={props.playlistTracks}
         onRemove={props.onRemove}
         onPlay={props.onPlay}
+        onShowModal={props.onShowModal}
         isRemoval={true}
       />
       <button className="Playlist-save" onClick={props.onSave}>

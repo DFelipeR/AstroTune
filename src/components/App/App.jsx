@@ -5,6 +5,7 @@ import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import Visualizer from "../Visualizer/Visualizer";
+import TrackModal from "../TrackModal/TrackModal";
 import Spotify from "../../util/Spotify";
 import { mockTracks } from "../../data/mockTracks";
 import playlistStorage from "../../util/playlistStorage";
@@ -21,6 +22,7 @@ class App extends React.Component {
       isPlaying: false,
       volume: 0.7,
       savedPlaylists: [],
+      selectedTrackForModal: null,
       useLocalStorage: true, // Use local storage instead of Spotify
     };
     this.addTrack = this.addTrack.bind(this);
@@ -35,6 +37,8 @@ class App extends React.Component {
     this.newPlaylist = this.newPlaylist.bind(this);
     this.togglePlayPause = this.togglePlayPause.bind(this);
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
+    this.showTrackModal = this.showTrackModal.bind(this);
+    this.closeTrackModal = this.closeTrackModal.bind(this);
   }
 
   componentDidMount() {
@@ -182,6 +186,14 @@ class App extends React.Component {
     this.setState({ volume });
   }
 
+  showTrackModal(track) {
+    this.setState({ selectedTrackForModal: track });
+  }
+
+  closeTrackModal() {
+    this.setState({ selectedTrackForModal: null });
+  }
+
   render() {
     return (
       <div className="App">
@@ -241,6 +253,7 @@ class App extends React.Component {
               searchResults={this.state.searchResults}
               onAdd={this.addTrack}
               onPlay={this.playTrack}
+              onShowModal={this.showTrackModal}
             />
             <Playlist
               playlistName={this.state.playlistName}
@@ -249,9 +262,17 @@ class App extends React.Component {
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
               onPlay={this.playTrack}
+              onShowModal={this.showTrackModal}
             />
           </div>
         </div>
+
+        <TrackModal
+          track={this.state.selectedTrackForModal}
+          isOpen={!!this.state.selectedTrackForModal}
+          onClose={this.closeTrackModal}
+          onPlay={this.playTrack}
+        />
       </div>
     );
   }

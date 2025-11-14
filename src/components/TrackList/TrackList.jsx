@@ -12,6 +12,7 @@ const TrackList = (props) => {
           onAdd={props.onAdd}
           onRemove={props.onRemove}
           onPlay={props.onPlay}
+          onShowModal={props.onShowModal}
           isRemoval={props.isRemoval}
         />
       ))}

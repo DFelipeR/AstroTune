@@ -1,5 +1,5 @@
-﻿import React from 'react';
-import './Track.css';
+﻿import React from "react";
+import "./Track.css";
 
 class Track extends React.Component {
   constructor(props) {
@@ -7,6 +7,7 @@ class Track extends React.Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.playTrack = this.playTrack.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
 
   addTrack() {
@@ -20,6 +21,12 @@ class Track extends React.Component {
   playTrack() {
     if (this.props.onPlay) {
       this.props.onPlay(this.props.track);
+    }
+  }
+
+  showModal() {
+    if (this.props.onShowModal) {
+      this.props.onShowModal(this.props.track);
     }
   }
 
@@ -41,13 +48,21 @@ class Track extends React.Component {
   render() {
     return (
       <div className="Track">
-        <div className="Track-information">
+        <div
+          className="Track-information"
+          onClick={this.showModal}
+          style={{ cursor: "pointer" }}
+        >
           <h3>{this.props.track.name}</h3>
           <p>
             {this.props.track.artist} | {this.props.track.album}
           </p>
         </div>
-        <button className="Track-play" onClick={this.playTrack} title="Play preview">
+        <button
+          className="Track-play"
+          onClick={this.playTrack}
+          title="Play preview"
+        >
           ▶
         </button>
         {this.renderAction()}

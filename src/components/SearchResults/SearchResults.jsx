@@ -10,6 +10,7 @@ const SearchResults = (props) => {
         tracks={props.searchResults}
         onAdd={props.onAdd}
         onPlay={props.onPlay}
+        onShowModal={props.onShowModal}
         isRemoval={false}
       />
     </div>
