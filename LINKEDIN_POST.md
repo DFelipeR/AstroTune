@@ -20,6 +20,7 @@
 Cada elemento de la UI tiene una animación única que mejora la experiencia visual:
 
 **1. Track Cards (Tarjetas de Canciones)**
+
 ```css
 /* Entrada suave de las tarjetas */
 @keyframes trackSlideIn {
@@ -33,11 +34,13 @@ Cada elemento de la UI tiene una animación única que mejora la experiencia vis
   transition: left 0.5s ease
 }
 ```
+
 - Efecto: Las canciones se deslizan suavemente desde la izquierda
 - Interacción: Brillo cyan que recorre la tarjeta al pasar mouse
 - Duración: 0.4s entrada, 0.5s brillo
 
 **2. Album Art Modal**
+
 ```css
 /* Flotación continua */
 @keyframes float {
@@ -51,11 +54,13 @@ Cada elemento de la UI tiene una animación única que mejora la experiencia vis
   to: opacity 1, translateY(0)
 }
 ```
+
 - Efecto: Album art "flota" en el modal
 - Modalidad: Aparece de abajo hacia arriba
 - Duración: 3s flotación infinita, 0.4s entrada
 
 **3. Visualizador de Audio (Canvas)**
+
 ```javascript
 /* 128 barras de frecuencia que se mueven en tiempo real */
 - 60 FPS smooth animation
@@ -63,24 +68,30 @@ Cada elemento de la UI tiene una animación única que mejora la experiencia vis
 - Colores: Gradiente cyan neon
 - Barras redondeadas con efecto glow
 ```
+
 - Efecto: Reacciona en tiempo real a la música
 - Duración: Continua mientras suena la música
 - Tecnología: Canvas 2D + Web Audio API
 
 **4. Progress Bar & Volume Slider**
+
 ```css
 /* Gradiente animado que se actualiza suavemente */
-background: linear-gradient(to right, 
-  #00FFFF 0%, 
-  #00FFFF ${progress}%, 
-  #1f2937 ${progress}%, 
-  #1f2937 100%)
+background: linear-gradient(
+  to right,
+  #00ffff 0%,
+  #00ffff ${progress}%,
+  #1f2937 ${progress}%,
+  #1f2937 100%
+);
 ```
+
 - Efecto: Barra de progreso con color cyan que avanza
 - Duración: Actualización en tiempo real (60 FPS)
 - Interacción: Clickeable para saltar a posición
 
 **5. Botones (Play, +/-, Volume)**
+
 ```css
 /* Efecto de explosión de fondo */
 .Track-play::before {
@@ -94,34 +105,39 @@ background: linear-gradient(to right,
   transform: scale(1.1) rotate(90deg)
 }
 ```
+
 - Efecto: Fondo se expande desde el centro
 - Interacción: Botones crecen y rotan al pasar mouse
 - Duración: 0.3s
 
 **6. Modal Overlay**
+
 ```css
 @keyframes fadeIn {
   from: opacity 0, backdrop-filter blur(0px)
   to: opacity 1, backdrop-filter blur(4px)
 }
 ```
+
 - Efecto: Fondo se oscurece con blur suave
 - Duración: 0.3s
 - Tecnología: CSS backdrop-filter
 
 **7. Contenido del Modal**
+
 ```css
 /* Aparición escalonada de elementos */
 .modal-track-name {
-  animation: fadeInDown 0.5s ease-out 0.1s both
+  animation: fadeInDown 0.5s ease-out 0.1s both;
 }
 .modal-track-artist {
-  animation: fadeInDown 0.5s ease-out 0.15s both
+  animation: fadeInDown 0.5s ease-out 0.15s both;
 }
 .modal-track-album {
-  animation: fadeInDown 0.5s ease-out 0.2s both
+  animation: fadeInDown 0.5s ease-out 0.2s both;
 }
 ```
+
 - Efecto: Cada línea aparece con pequeño delay
 - Duración: 0.5s cada una, separadas 0.05s
 - Resultado: Efecto de "cascada"
@@ -142,6 +158,7 @@ src/components/
 ```
 
 **Ajustar velocidad de animación:**
+
 ```css
 /* Cambiar de 0.3s a tu preferencia */
 transition: all 0.5s ease;
@@ -149,13 +166,14 @@ animation: trackSlideIn 0.6s ease-out;
 ```
 
 **Modificar colores/efectos:**
+
 ```css
 /* Cambiar cyan por otro color */
-color: #00FFFF;
+color: #00ffff;
 box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
 
 /* Prueba con magenta */
-color: #FF00FF;
+color: #ff00ff;
 box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
 ```
 
@@ -182,22 +200,26 @@ He estado trabajando en un proyecto personal que combina **diseño futurista, fu
 ### 🛠️ Stack Técnico Completo
 
 **Frontend:**
+
 - React 19.x (class components + hooks)
 - Vite 7.x (bundler rápido)
 - CSS3 (gradientes, animaciones, backdrop-filter)
 
 **Audio & Visualización:**
+
 - HTML5 `<audio>` API
 - Web Audio API (context, analyser, frequency data)
 - Canvas 2D (128 barras redondeadas)
 - requestAnimationFrame (60 FPS smooth rendering)
 
 **Estado & Persistencia:**
+
 - React State Management (App.jsx como contenedor)
 - localStorage API (playlists)
 - JSON serialization
 
 **Deployment:**
+
 - Surge CDN (infraestructura global)
 - Live en: https://astrotune-music.surge.sh
 - GitHub repository: DFelipeR/AstroTune
