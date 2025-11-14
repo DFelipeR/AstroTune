@@ -3,6 +3,7 @@
 ## ✅ PROYECTO COMPLETADO Y PUBLICADO
 
 ### 🌐 URL EN VIVO
+
 **https://astrotune-music.surge.sh**
 
 ---
@@ -10,6 +11,7 @@
 ## 🎯 Características Implementadas
 
 ### ✨ Reproductor de Audio
+
 - ✅ **Reproducción funcional** con HTML5 Audio API
 - ✅ **50 canciones precargadas** con tonos musicales diferentes
 - ✅ **Control play/pause** con animación suave
@@ -19,12 +21,14 @@
 - ✅ **Información de canción** (nombre, artista, álbum, duración)
 
 ### 🎨 Diseño
+
 - ✅ **Tema Cyberpunk** con colores neon (Cyan #00FFFF, Magenta #2d1b4e)
 - ✅ **Efectos visuales** glow y sombras
 - ✅ **Interfaz responsiva** para escritorio y tablets
 - ✅ **Transiciones y animaciones** suaves
 
 ### 📊 Características Técnicas
+
 - ✅ **React 19.x** con Hooks (useState, useEffect, useCallback, useRef)
 - ✅ **Vite 7.x** como build tool con HMR
 - ✅ **CSS3** scoped por componente
@@ -35,35 +39,36 @@
 
 ## 📦 Stack Tecnológico
 
-| Tecnología | Versión | Uso |
-|-----------|---------|-----|
-| React | 19.x | Framework frontend |
-| Vite | 7.x | Build tool |
-| JavaScript | ES6+ | Lenguaje |
-| CSS3 | Moderno | Styling |
-| HTML5 Audio API | Nativa | Reproducción |
-| Surge | CDN | Deploy |
+| Tecnología      | Versión | Uso                |
+| --------------- | ------- | ------------------ |
+| React           | 19.x    | Framework frontend |
+| Vite            | 7.x     | Build tool         |
+| JavaScript      | ES6+    | Lenguaje           |
+| CSS3            | Moderno | Styling            |
+| HTML5 Audio API | Nativa  | Reproducción       |
+| Surge           | CDN     | Deploy             |
 
 ---
 
 ## 📊 Estadísticas
 
-| Métrica | Valor |
-|---------|-------|
-| Canciones | 50 |
-| Duración c/u | 10 segundos |
-| Componentes React | 7 |
-| Archivos CSS | 7 |
-| Bundle JS | 210 kB (65 kB gzipped) |
-| Bundle CSS | 9.42 kB (2.22 kB gzipped) |
-| Deployment Size | 43.2 MB |
-| FPS Reproductor | 60 |
+| Métrica           | Valor                     |
+| ----------------- | ------------------------- |
+| Canciones         | 50                        |
+| Duración c/u      | 10 segundos               |
+| Componentes React | 7                         |
+| Archivos CSS      | 7                         |
+| Bundle JS         | 210 kB (65 kB gzipped)    |
+| Bundle CSS        | 9.42 kB (2.22 kB gzipped) |
+| Deployment Size   | 43.2 MB                   |
+| FPS Reproductor   | 60                        |
 
 ---
 
 ## 🎯 Mejoras Pendientes
 
 ### 🔴 Críticas (Deben implementarse)
+
 ```
 - [ ] Integración Spotify API (búsqueda real)
 - [ ] Autenticación OAuth (login Spotify)
@@ -72,6 +77,7 @@
 ```
 
 ### 🟡 Importantes (Mejoran UX)
+
 ```
 - [ ] Responsive mobile (smartphones)
 - [ ] Funcionalidad búsqueda
@@ -81,6 +87,7 @@
 ```
 
 ### 🟢 Opcionales (Futuro)
+
 ```
 - [ ] Selector de temas (claro/oscuro)
 - [ ] Ecualizador gráfico
@@ -96,6 +103,7 @@
 ## 🚀 Instrucciones de Despliegue
 
 ### Desplegar a Surge (Actual)
+
 ```powershell
 cd "C:\Users\USER\OneDrive\Escritorio\Projects\Jamming\Jammming"
 npm run build
@@ -104,11 +112,13 @@ surge --project . --domain astrotune-music.surge.sh
 ```
 
 ### Desplegar a Vercel
+
 ```powershell
 vercel --prod
 ```
 
 ### Desplegar a Netlify
+
 ```powershell
 netlify deploy --prod --dir=dist
 ```
@@ -142,6 +152,7 @@ AstroTune/
 ## 🔊 Archivos de Audio
 
 ### Formato
+
 - **Tipo**: WAV (formato sin compresión, máxima compatibilidad)
 - **Duración**: 10 segundos cada uno
 - **Tamaño**: ~864 KB por archivo
@@ -149,6 +160,7 @@ AstroTune/
 - **Calidad**: 44.1 kHz, 16-bit, Mono
 
 ### Notas Musicales
+
 ```
 C (Do)    - 262 Hz
 D (Re)    - 294 Hz
@@ -165,19 +177,20 @@ Cada canción tiene una nota diferente en ciclo: C→D→E→F→G→A→B
 
 ## 🎬 Animaciones Implementadas
 
-| Elemento | Animación | FPS |
-|----------|-----------|-----|
-| Barra de progreso | requestAnimationFrame | 60 |
-| Botón play/pause | pulse | N/A |
-| Visualizador | pulse | N/A |
-| Botones | hover scale | N/A |
-| Glow effects | box-shadow | N/A |
+| Elemento          | Animación             | FPS |
+| ----------------- | --------------------- | --- |
+| Barra de progreso | requestAnimationFrame | 60  |
+| Botón play/pause  | pulse                 | N/A |
+| Visualizador      | pulse                 | N/A |
+| Botones           | hover scale           | N/A |
+| Glow effects      | box-shadow            | N/A |
 
 ---
 
 ## 🔐 Seguridad y CORS
 
 ✅ **Resuelto**: No hay problemas de CORS porque:
+
 - Audio servido localmente desde `/public/audio/`
 - Same-origin: Surge CDN serve los archivos
 - No hay requests a dominios externos
