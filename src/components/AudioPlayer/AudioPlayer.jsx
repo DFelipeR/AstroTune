@@ -1,19 +1,25 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./AudioPlayer.css";
 
-const AudioPlayer = ({ track, onClose }) => {
-  const audioRef = useRef(null);
+const AudioPlayer = ({
+  track,
+  onClose,
+  audioRef,
+  isPlaying,
+  onPlayPause,
+  volume,
+  onVolumeChange,
+}) => {
+  const localAudioRef = audioRef || useRef(null);
   const sliderRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(0.7);
   const animationFrameRef = useRef(null);
 
   // Smooth animation loop using requestAnimationFrame
   const updateProgressSmooth = useCallback(() => {
-    if (audioRef.current && isPlaying) {
-      const currentTimeValue = audioRef.current.currentTime;
+    if (localAudioRef.current && isPlaying) {
+      const currentTimeValue = localAudioRef.current.currentTime;
       setCurrentTime(currentTimeValue);
       // Update slider input directly for smooth thumb movement
       if (sliderRef.current) {
@@ -25,22 +31,22 @@ const AudioPlayer = ({ track, onClose }) => {
 
   // Event handlers
   const handleTimeUpdate = useCallback(() => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime);
+    if (localAudioRef.current) {
+      setCurrentTime(localAudioRef.current.currentTime);
     }
   }, []);
 
   const handleLoadedMetadata = useCallback(() => {
-    if (audioRef.current) {
-      console.log("Metadata loaded, duration:", audioRef.current.duration);
-      setDuration(audioRef.current.duration);
+    if (localAudioRef.current) {
+      console.log("Metadata loaded, duration:", localAudioRef.current.duration);
+      setDuration(localAudioRef.current.duration);
     }
   }, []);
 
   const handleEnded = useCallback(() => {
     console.log("Audio ended");
-    setIsPlaying(false);
-  }, []);
+    if (onPlayPause) onPlayPause();
+  }, [onPlayPause]);
 
   const handleError = useCallback((e) => {
     console.error("Audio error:", e.target.error?.message || e);
@@ -48,7 +54,7 @@ const AudioPlayer = ({ track, onClose }) => {
 
   // Setup audio element with event listeners
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = localAudioRef.current;
     if (!audio) return;
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
@@ -70,25 +76,25 @@ const AudioPlayer = ({ track, onClose }) => {
 
   // Load track
   useEffect(() => {
-    if (!track || !audioRef.current) return;
+    if (!track || !localAudioRef.current) return;
 
     console.log("Loading track:", track.name, "URL:", track.previewUrl);
-    audioRef.current.src = track.previewUrl;
-    audioRef.current.load();
+    localAudioRef.current.src = track.previewUrl;
+    localAudioRef.current.load();
     setCurrentTime(0);
     setDuration(0);
   }, [track]);
 
   // Handle play/pause
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = localAudioRef.current;
     if (!audio) return;
 
     if (isPlaying) {
       console.log("Play requested");
       audio.play().catch((err) => {
         console.error("Play error:", err.name, err.message);
-        setIsPlaying(false);
+        if (onPlayPause) onPlayPause();
       });
       // Start smooth animation loop
       animationFrameRef.current = requestAnimationFrame(updateProgressSmooth);
@@ -106,32 +112,32 @@ const AudioPlayer = ({ track, onClose }) => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isPlaying, updateProgressSmooth]);
+  }, [isPlaying, updateProgressSmooth, onPlayPause]);
 
   // Handle volume
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
+    if (localAudioRef.current) {
+      localAudioRef.current.volume = volume;
     }
   }, [volume]);
 
   const handlePlayPause = () => {
-    console.log("Play/pause clicked, current state:", isPlaying);
-    setIsPlaying((prev) => !prev);
+    console.log("Play/pause clicked");
+    if (onPlayPause) onPlayPause();
   };
 
   const handleProgressChange = (e) => {
     const newTime = parseFloat(e.target.value);
     console.log("Seeking to:", newTime);
-    if (audioRef.current) {
-      audioRef.current.currentTime = newTime;
+    if (localAudioRef.current) {
+      localAudioRef.current.currentTime = newTime;
     }
   };
 
   const handleVolumeChange = (e) => {
     const newVolume = parseFloat(e.target.value);
     console.log("Volume changed to:", newVolume);
-    setVolume(newVolume);
+    if (onVolumeChange) onVolumeChange(newVolume);
   };
 
   const formatTime = (seconds) => {
@@ -154,7 +160,7 @@ const AudioPlayer = ({ track, onClose }) => {
         </button>
       </div>
 
-      <audio ref={audioRef} crossOrigin="anonymous" preload="auto" />
+      <audio ref={localAudioRef} crossOrigin="anonymous" preload="auto" />
 
       <div className="AudioPlayer-info">
         <p className="AudioPlayer-track">{track.name}</p>

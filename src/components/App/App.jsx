@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
+import Visualizer from "../Visualizer/Visualizer";
 import Spotify from "../../util/Spotify";
 import { mockTracks } from "../../data/mockTracks";
 import playlistStorage from "../../util/playlistStorage";
@@ -11,12 +12,14 @@ import playlistStorage from "../../util/playlistStorage";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.audioRef = React.createRef();
     this.state = {
       searchResults: mockTracks,
       playlistName: "New Playlist",
       playlistTracks: [],
       currentTrack: null,
       isPlaying: false,
+      volume: 0.7,
       savedPlaylists: [],
       useLocalStorage: true, // Use local storage instead of Spotify
     };
@@ -30,6 +33,8 @@ class App extends React.Component {
     this.loadPlaylist = this.loadPlaylist.bind(this);
     this.deletePlaylist = this.deletePlaylist.bind(this);
     this.newPlaylist = this.newPlaylist.bind(this);
+    this.togglePlayPause = this.togglePlayPause.bind(this);
+    this.handleVolumeChange = this.handleVolumeChange.bind(this);
   }
 
   componentDidMount() {
@@ -168,6 +173,15 @@ class App extends React.Component {
       playlistTracks: [],
     });
   }
+
+  togglePlayPause() {
+    this.setState({ isPlaying: !this.state.isPlaying });
+  }
+
+  handleVolumeChange(volume) {
+    this.setState({ volume });
+  }
+
   render() {
     return (
       <div className="App">
@@ -176,12 +190,18 @@ class App extends React.Component {
           <p>Your cyberpunk playlist manager</p>
         </div>
 
-        {this.state.currentTrack && (
-          <AudioPlayer
-            track={this.state.currentTrack}
-            onClose={this.stopTrack}
-          />
-        )}
+        <div className="player-visualizer-container">
+          {this.state.currentTrack && (
+            <Visualizer
+              audioRef={this.audioRef}
+              currentTrack={this.state.currentTrack}
+              isPlaying={this.state.isPlaying}
+              onPlayPause={this.togglePlayPause}
+              volume={this.state.volume}
+              onVolumeChange={this.handleVolumeChange}
+            />
+          )}
+        </div>
 
         <div className="app-container">
           <SearchBar onSearch={this.search} />
