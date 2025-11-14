@@ -165,7 +165,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="app-header">
-          <h1>🚀 AstroTune</h1>
+          <h1>AstroTune</h1>
           <p>Your cyberpunk playlist manager</p>
         </div>
 
@@ -181,7 +181,7 @@ class App extends React.Component {
 
           {this.state.savedPlaylists.length > 0 && (
             <div className="saved-playlists">
-              <h3>📋 Your Playlists</h3>
+              <h3>Your Playlists</h3>
               <div className="playlist-buttons">
                 {this.state.savedPlaylists.map((name) => (
                   <div key={name} className="playlist-button-group">
@@ -196,7 +196,7 @@ class App extends React.Component {
                       onClick={() => this.deletePlaylist(name)}
                       title="Delete"
                     >
-                      🗑
+                      Delete
                     </button>
                   </div>
                 ))}

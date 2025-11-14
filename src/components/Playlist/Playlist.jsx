@@ -22,7 +22,7 @@ const Playlist = (props) => {
         isRemoval={true}
       />
       <button className="Playlist-save" onClick={props.onSave}>
-        💾 Save Playlist
+        Save Playlist
       </button>
     </div>
   );

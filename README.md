@@ -14,16 +14,35 @@
 
 ## ✨ Características Implementadas
 
+### 🎵 Reproductor
+
 - ✅ **Reproductor de Audio Funcional** - Reproducción fluida con barra de progreso
-- ✅ **50 Canciones Precargadas** - Con tonos musicales diferentes (DO, RE, MI, FA, SOL, LA, SI)
+- ✅ **50 Canciones Reales** - Hits 2019-2024 (The Weeknd, Taylor Swift, Bad Bunny, BTS, etc.)
 - ✅ **Control de Reproducción** - Play/Pause con animación suave
 - ✅ **Barra de Progreso Fluida** - Animación a 60 FPS con `requestAnimationFrame`
 - ✅ **Control de Volumen** - Slider con indicador visual en tiempo real
+- ✅ **Información de Canción** - Nombre, artista, álbum y duración
+
+### 🔍 Búsqueda
+
+- ✅ **Búsqueda en Tiempo Real** - Filtra canciones mientras escribes
+- ✅ **Multi-criterio** - Busca por nombre, artista o álbum
+- ✅ **Resultados Instantáneos** - Sin lag, búsqueda optimizada
+
+### 💾 Gestión de Playlists
+
+- ✅ **Crear Playlists** - Personaliza tus propias playlists
+- ✅ **Guardar Localmente** - localStorage para persistencia sin backend
+- ✅ **Cargar Playlists** - Accede a tus playlists guardadas con un clic
+- ✅ **Eliminar Playlists** - Gestión completa de tus colecciones
+- ✅ **Auto-save** - Tus ediciones se guardan automáticamente
+
+### 🎨 Diseño & UX
+
 - ✅ **Diseño Cyberpunk** - Tema futurista con colores neon (Cyan, Magenta, Negro)
 - ✅ **Visualizador de Audio** - Barras animadas que responden a la reproducción
-- ✅ **Información de Canción** - Nombre, artista, álbum y duración
-- ✅ **Interfaz Responsiva** - Optimizada para escritorio y tablets
-- ✅ **Deploy en Vivo** - Publicado en Surge CDN
+- ✅ **Interfaz Responsiva** - Optimizada para escritorio, tablets y móviles
+- ✅ **Deploy en Vivo** - Publicado en Surge CDN con HTTPS global
 
 ---
 
