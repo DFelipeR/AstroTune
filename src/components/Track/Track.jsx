@@ -33,13 +33,21 @@ class Track extends React.Component {
   renderAction() {
     if (this.props.isRemoval) {
       return (
-        <button className="Track-action" onClick={this.removeTrack}>
-          âˆ’
+        <button
+          className="Track-action"
+          onClick={this.removeTrack}
+          title="Remove from playlist"
+        >
+          ✕
         </button>
       );
     }
     return (
-      <button className="Track-action" onClick={this.addTrack}>
+      <button
+        className="Track-action"
+        onClick={this.addTrack}
+        title="Add to playlist"
+      >
         +
       </button>
     );

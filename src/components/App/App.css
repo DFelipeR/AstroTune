@@ -15,23 +15,96 @@
   text-align: center;                /* Centrar texto */
   padding: 2rem;                     /* Espacio interior */
   border-bottom: 2px solid rgba(0, 255, 255, 0.3); /* Línea cyan abajo */
-  background: rgba(0, 0, 0, 0.5);   /* Fondo semi-transparente */
+  background: linear-gradient(45deg, rgba(0, 20, 60, 0.8), rgba(0, 255, 255, 0.05), rgba(0, 20, 60, 0.8));
+  background-size: 300% 300%;
+  animation: cyberpunkGlow 8s ease infinite;
   position: relative;
   z-index: 900;
+  overflow: hidden;
+}
+
+@keyframes cyberpunkGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Efecto de líneas animadas en el fondo */
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: scanlines 8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(50px);
+  }
 }
 
 .app-header h1 {
   margin: 0;
   font-size: 3rem;                  /* Título grande */
   color: #00FFFF;                   /* Cyan brillante */
-  text-shadow: 0 0 30px rgba(0, 255, 255, 0.6); /* Efecto de brillo */
+  text-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.6),
+    0 0 60px rgba(0, 255, 255, 0.3),
+    0 0 90px rgba(0, 100, 255, 0.2);
   letter-spacing: 3px;              /* Espaciar letras */
+  position: relative;
+  z-index: 2;
+  animation: titlePulse 2s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 30px rgba(0, 255, 255, 0.6),
+      0 0 60px rgba(0, 255, 255, 0.3);
+  }
+  50% {
+    text-shadow: 
+      0 0 50px rgba(0, 255, 255, 0.8),
+      0 0 80px rgba(0, 255, 255, 0.5),
+      0 0 110px rgba(0, 100, 255, 0.3);
+  }
 }
 
 .app-header p {
   margin: 0.5rem 0 0;
   font-size: 1.1rem;
   color: #94a3b8;                   /* Gris azulado */
+  position: relative;
+  z-index: 2;
+  animation: subtitleFade 3s ease-in-out infinite;
+}
+
+@keyframes subtitleFade {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Contenedor de contenido (SearchBar + Content) */

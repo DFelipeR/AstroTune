@@ -6,14 +6,47 @@
 
 🎵 Acabo de lanzar **AstroTune** - un gestor de playlists con diseño cyberpunk.
 
-✨ 50 canciones | 🔍 Búsqueda en tiempo real | 💾 Playlists guardadas localmente | ▶️ Audio interactivo | 🎨 UI neon
+**¿Qué tiene?**
+✨ 50 canciones reales (hits 2019-2024)
+🔍 Búsqueda en tiempo real
+💾 Playlists guardadas en navegador
+▶️ Reproductor con visualizador 60 FPS
+🎨 Animaciones suaves + UI neon
 
-🚀 Live: https://astrotune-music.surge.sh
-💻 Open source: github.com/DFelipeR/AstroTune
+**Tech Stack:**
+React 19 + Vite 7 + HTML5 Audio API + Canvas 2D + Web Audio API
 
-Built with React 19 + Vite 7 + Web Audio API
+**¿Cuál fue el desafío?**
+Implementar un visualizador en tiempo real con 128 barras de frecuencia, animaciones suaves a 60 FPS, y persistencia sin backend. Todo corriendo en el navegador sin CORS.
 
-#React #WebDevelopment #MusicApp #OpenSource
+**Próximas features que voy a implementar:**
+🔜 Backend Node.js + Express
+🔜 Autenticación con Google/GitHub
+🔜 Compartir playlists entre usuarios
+🔜 Integración Spotify API
+🔜 Progressive Web App (offline mode)
+
+🚀 **Live:** https://astrotune-music.surge.sh
+💻 **Open source:** github.com/DFelipeR/AstroTune
+📝 **Documentación completa en el README**
+
+---
+
+**¿Qué aprendí?**
+✅ Web Audio API para análisis en tiempo real
+✅ requestAnimationFrame para animaciones ultra suaves
+✅ Refs en React para control directo del DOM
+✅ localStorage para persistencia sin backend
+✅ Deployment con Surge CDN
+
+**Mi mensaje:**
+Si tienes una idea, no esperes a que todo sea perfecto. Empieza con lo que tienes, aprende en el camino, y mejora iterativamente. AstroTune comenzó como un proyecto simple y creció en cada sesión.
+
+La clave es: **Idea → Acción → Feedback → Mejora → Repetir**
+
+¿Estás trabajando en algo similar? ¡Conectemos! Me encantaría saber qué estás construyendo 👇
+
+#React #WebDevelopment #MusicApp #OpenSource #FrontEnd #WebAudio #JavaScript #Coding #Developers
 
 ---
 
@@ -34,10 +67,63 @@ React 19 + Vite 7 + HTML5 Audio API + Canvas 2D
 **¿Cuál fue el desafío?**
 Implementar animaciones 60 FPS suaves, Web Audio API para visualizador en tiempo real, y persistencia sin backend.
 
+**🚀 Próximas features (en desarrollo):**
+
+- Backend Node.js + Express
+- Login con Google / GitHub
+- Compartir playlists
+- Integración Spotify API
+- PWA (offline mode)
+
 🔗 Pruébalo: https://astrotune-music.surge.sh
 💻 GitHub: DFelipeR/AstroTune
 
 #ReactJS #WebDevelopment #WebAudio #OpenSource
+
+---
+
+## 🚀 ROADMAP - Próximas Características (EN DESARROLLO)
+
+### Fase 1: Backend & Persistencia (AHORA)
+
+- ✅ Node.js + Express API
+- ✅ Guardar playlists en servidor
+- ✅ Sincronización en tiempo real
+- 🔜 Deploy en Render.com
+
+### Fase 2: Autenticación (Próximas 2 semanas)
+
+- 🔜 Login con Google / GitHub
+- 🔜 Perfiles de usuario
+- 🔜 Playlists personalizadas por usuario
+
+### Fase 3: Features Sociales (Próximas 4 semanas)
+
+- 🔜 Compartir playlists
+- 🔜 Followers / Following
+- 🔜 Likes en playlists
+- 🔜 Historial de reproducción
+
+### Fase 4: Spotify Integration (Próximas 6 semanas)
+
+- 🔜 Autenticación Spotify
+- 🔜 Buscar canciones reales en Spotify
+- 🔜 Guardar playlists en Spotify
+- 🔜 Sincronización bidireccional
+
+### Fase 5: Analytics & Admin (Próximas 8 semanas)
+
+- 🔜 Dashboard de estadísticas
+- 🔜 Canciones más reproducidas
+- 🔜 Usuarios más activos
+- 🔜 Admin panel
+
+### Fase 6: Mobile & PWA (Próximas 10 semanas)
+
+- 🔜 App nativa (React Native)
+- 🔜 Progressive Web App (offline mode)
+- 🔜 Notificaciones push
+- 🔜 Sync offline
 
 ---
 
@@ -239,6 +325,7 @@ Código abierto en GitHub: github.com/DFelipeR/AstroTune
 - JSON serialization
 
 **Deployment:**
+
 - Surge CDN (infraestructura global)
 - Live en: https://astrotune-music.surge.sh
 - GitHub repository: DFelipeR/AstroTune
@@ -258,13 +345,13 @@ Código abierto en GitHub: github.com/DFelipeR/AstroTune
 
 ### 🎯 Desafíos Técnicos Resueltos
 
-| Problema | Solución |
-|----------|----------|
-| Audio con CORS | Archivos locales en `/public/audio` |
-| Progreso choppy | requestAnimationFrame (60 FPS) |
-| Sincronización slider | DOM refs actualizadas en tiempo real |
-| Persistencia | localStorage utility (playlistStorage.js) |
-| Visualizador tiempo real | Web Audio API + Canvas 2D |
+| Problema                 | Solución                                  |
+| ------------------------ | ----------------------------------------- |
+| Audio con CORS           | Archivos locales en `/public/audio`       |
+| Progreso choppy          | requestAnimationFrame (60 FPS)            |
+| Sincronización slider    | DOM refs actualizadas en tiempo real      |
+| Persistencia             | localStorage utility (playlistStorage.js) |
+| Visualizador tiempo real | Web Audio API + Canvas 2D                 |
 
 ### 📊 Resultados
 

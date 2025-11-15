@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./Visualizer.css";
 
-let audioContext = null;
-let analyser = null;
-let source = null;
-
 const SpotifyBottomPlayer = ({
   audioRef,
   currentTrack,
@@ -12,6 +8,8 @@ const SpotifyBottomPlayer = ({
   onPlayPause,
   volume,
   onVolumeChange,
+  onNextTrack,
+  onPrevTrack,
 }) => {
   const canvasRef = useRef(null);
   const sliderRef = useRef(null);
@@ -19,6 +17,54 @@ const SpotifyBottomPlayer = ({
   const [duration, setDuration] = useState(0);
   const animationFrameRef = useRef(null);
   const visualizerAnimRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const sourceRef = useRef(null);
+
+  // Inicializar Web Audio API - más robusto
+  const initAudioContext = useCallback(() => {
+    if (audioContextRef.current || !audioRef?.current) return;
+
+    try {
+      const audioElement = audioRef.current;
+      let context = audioContextRef.current;
+
+      if (!context) {
+        context = new (window.AudioContext || window.webkitAudioContext)();
+        audioContextRef.current = context;
+      }
+
+      if (context.state === "suspended") {
+        context.resume().catch(() => {});
+      }
+
+      // Solo crear source una vez
+      if (!sourceRef.current) {
+        try {
+          const source = context.createMediaElementAudioSource(audioElement);
+          const analyser = context.createAnalyser();
+          analyser.fftSize = 256;
+          analyser.smoothingTimeConstant = 0.8;
+
+          source.connect(analyser);
+          analyser.connect(context.destination);
+
+          analyserRef.current = analyser;
+          sourceRef.current = source;
+
+          console.log("Web Audio API inicializado correctamente");
+        } catch (sourceError) {
+          console.error("Error conectando source:", sourceError.message);
+          // Fallback: crear analyser sin source
+          const analyser = context.createAnalyser();
+          analyser.fftSize = 256;
+          analyserRef.current = analyser;
+        }
+      }
+    } catch (e) {
+      console.error("Error en Web Audio:", e.message);
+    }
+  }, [audioRef]);
 
   // Update smooth progress
   const updateProgressSmooth = useCallback(() => {
@@ -32,7 +78,7 @@ const SpotifyBottomPlayer = ({
     }
   }, [isPlaying, audioRef]);
 
-  // Setup visualizer
+  // Setup visualizer - FIXED VERSION
   useEffect(() => {
     if (!audioRef?.current || !canvasRef.current) return;
 
@@ -40,78 +86,126 @@ const SpotifyBottomPlayer = ({
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      analyser = audioContext.createAnalyser();
-      analyser.fftSize = 256;
+    // Inicializar Web Audio una sola vez
+    initAudioContext();
 
-      try {
-        source = audioContext.createMediaElementAudioSource(audio);
-        source.connect(analyser);
-        analyser.connect(audioContext.destination);
-      } catch (e) {
-        console.log("Already connected");
-      }
-    }
-
-    if (audioContext.state === "suspended") {
-      document.addEventListener("click", () => audioContext.resume(), {
-        once: true,
-      });
-    }
-
-    const dataArray = new Uint8Array(analyser.frequencyBinCount);
+    let animationPhase = 0;
+    let isDrawing = false;
 
     const draw = () => {
+      // Siempre continuar dibujando
       visualizerAnimRef.current = requestAnimationFrame(draw);
-      analyser.getByteFrequencyData(dataArray);
 
-      ctx.fillStyle = "transparent";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Limpiar canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const barCount = 128;
       const barWidth = canvas.width / barCount;
       const maxHeight = canvas.height * 0.7;
 
-      for (let i = 0; i < barCount; i++) {
-        const index = Math.floor((i / barCount) * dataArray.length);
-        const barHeight = (dataArray[index] / 255) * maxHeight;
+      let dataArray = new Uint8Array(barCount);
 
-        ctx.fillStyle = `hsl(180, 100%, 50%)`; // Cyan color
+      // Modo 1: Si Web Audio funciona
+      if (analyserRef.current) {
+        try {
+          analyserRef.current.getByteFrequencyData(dataArray);
+          // Si todos los valores son 0, usar fallback
+          if (dataArray.every((v) => v === 0)) {
+            // Usar animacion sinusoidal cuando no hay audio
+            const timeProgression = (audio.currentTime || 0) * 2;
+            for (let i = 0; i < barCount; i++) {
+              const offset = (i / barCount) * Math.PI * 2;
+              dataArray[i] = Math.sin(timeProgression + offset) * 40 + 40;
+            }
+          }
+        } catch (e) {
+          // Error en analyser, usar fallback
+          for (let i = 0; i < barCount; i++) {
+            dataArray[i] = Math.sin((i + animationPhase) * 0.05) * 60 + 30;
+          }
+          animationPhase += 0.3;
+        }
+      } else {
+        // Modo 2: Sin Web Audio - animacion pura
+        const timeProgression = (audio.currentTime || 0) * 2;
+        for (let i = 0; i < barCount; i++) {
+          const offset = (i / barCount) * Math.PI * 2;
+          dataArray[i] = Math.sin(timeProgression + offset) * 60 + 40;
+        }
+      }
+
+      // Dibujar barras
+      for (let i = 0; i < barCount; i++) {
+        const value = Math.max(0, dataArray[i]);
+        const barHeight = (value / 255) * maxHeight;
+
+        ctx.fillStyle = "hsl(180, 100%, 50%)";
 
         const x = i * barWidth + 1;
         const y = canvas.height - barHeight;
         const w = barWidth - 2;
         const h = barHeight;
-        const r = w / 2;
+        const r = Math.min(w / 2, 3);
 
+        // Dibujar barra con bordes redondeados
         ctx.beginPath();
         ctx.moveTo(x + r, y);
         ctx.lineTo(x + w - r, y);
-        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-        ctx.lineTo(x + w, y + h - r);
-        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        if (h > 0) {
+          ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+          ctx.lineTo(x + w, y + h - r);
+          ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        } else {
+          ctx.lineTo(x + w, y);
+        }
         ctx.lineTo(x + r, y + h);
-        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-        ctx.lineTo(x, y + r);
-        ctx.quadraticCurveTo(x, y, x + r, y);
+        if (h > 0) {
+          ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+          ctx.lineTo(x, y + r);
+          ctx.quadraticCurveTo(x, y, x + r, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
         ctx.fill();
       }
     };
 
-    const handlePlay = () => {
-      if (audioContext.state === "suspended") audioContext.resume();
-      if (visualizerAnimRef.current)
-        cancelAnimationFrame(visualizerAnimRef.current);
-      draw();
+    // Iniciar animacion
+    draw();
+
+    // Resume audio context on first interaction
+    const resumeAudio = () => {
+      if (audioContextRef.current?.state === "suspended") {
+        audioContextRef.current.resume().catch(() => {});
+      }
     };
 
-    const handlePause = () => {
-      if (visualizerAnimRef.current)
+    document.addEventListener("click", resumeAudio);
+
+    return () => {
+      if (visualizerAnimRef.current) {
         cancelAnimationFrame(visualizerAnimRef.current);
-      ctx.fillStyle = "transparent";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      document.removeEventListener("click", resumeAudio);
     };
+  }, [audioRef, initAudioContext]);
+
+  // Update smooth progress
+  useEffect(() => {
+    if (isPlaying) {
+      animationFrameRef.current = requestAnimationFrame(updateProgressSmooth);
+    }
+    return () => {
+      if (animationFrameRef.current)
+        cancelAnimationFrame(animationFrameRef.current);
+    };
+  }, [isPlaying, updateProgressSmooth]);
+
+  // Handle audio events
+  useEffect(() => {
+    if (!audioRef?.current) return;
+
+    const audio = audioRef.current;
 
     const handleLoadedMetadata = () => {
       setDuration(audio.duration);
@@ -124,29 +218,14 @@ const SpotifyBottomPlayer = ({
       }
     };
 
-    audio.addEventListener("play", handlePlay);
-    audio.addEventListener("pause", handlePause);
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
     audio.addEventListener("timeupdate", handleTimeUpdate);
 
     return () => {
-      audio.removeEventListener("play", handlePlay);
-      audio.removeEventListener("pause", handlePause);
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, [audioRef]);
-
-  // Update smooth progress
-  useEffect(() => {
-    if (isPlaying) {
-      animationFrameRef.current = requestAnimationFrame(updateProgressSmooth);
-    }
-    return () => {
-      if (animationFrameRef.current)
-        cancelAnimationFrame(animationFrameRef.current);
-    };
-  }, [isPlaying, updateProgressSmooth]);
 
   // Handle volume
   useEffect(() => {
@@ -193,8 +272,24 @@ const SpotifyBottomPlayer = ({
       </div>
 
       <div className="player-center">
+        <button
+          className="player-nav-btn"
+          onClick={onPrevTrack}
+          title="Previous track"
+        >
+          ⏮
+        </button>
+
         <button className="player-play-btn" onClick={handlePlayPause}>
           {isPlaying ? "⏸" : "▶"}
+        </button>
+
+        <button
+          className="player-nav-btn"
+          onClick={onNextTrack}
+          title="Next track"
+        >
+          ⏭
         </button>
 
         <div className="player-visualizer">

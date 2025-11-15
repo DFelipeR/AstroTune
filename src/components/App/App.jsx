@@ -6,6 +6,7 @@ import Playlist from "../Playlist/Playlist";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import Visualizer from "../Visualizer/Visualizer";
 import TrackModal from "../TrackModal/TrackModal";
+import PlaylistViewModal from "../PlaylistViewModal/PlaylistViewModal";
 import Spotify from "../../util/Spotify";
 import { mockTracks } from "../../data/mockTracks";
 import playlistStorage from "../../util/playlistStorage";
@@ -23,6 +24,7 @@ class App extends React.Component {
       volume: 0.7,
       savedPlaylists: [],
       selectedTrackForModal: null,
+      selectedPlaylistName: null,
       useLocalStorage: true, // Use local storage instead of Spotify
     };
     this.addTrack = this.addTrack.bind(this);
@@ -39,6 +41,10 @@ class App extends React.Component {
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
     this.showTrackModal = this.showTrackModal.bind(this);
     this.closeTrackModal = this.closeTrackModal.bind(this);
+    this.playNextTrack = this.playNextTrack.bind(this);
+    this.playPrevTrack = this.playPrevTrack.bind(this);
+    this.showPlaylistModal = this.showPlaylistModal.bind(this);
+    this.closePlaylistModal = this.closePlaylistModal.bind(this);
   }
 
   componentDidMount() {
@@ -96,6 +102,10 @@ class App extends React.Component {
     if (!this.state.playlistTracks.find((t) => t.id === track.id)) {
       this.setState({
         playlistTracks: [...this.state.playlistTracks, track],
+        // Eliminar de searchResults
+        searchResults: this.state.searchResults.filter(
+          (t) => t.id !== track.id
+        ),
       });
     }
   }
@@ -207,6 +217,41 @@ class App extends React.Component {
     this.setState({ selectedTrackForModal: null });
   }
 
+  playNextTrack() {
+    const currentList = this.state.currentTrack
+      ? this.state.searchResults
+      : this.state.playlistTracks;
+    if (!currentList || currentList.length === 0) return;
+
+    const currentIndex = currentList.findIndex(
+      (t) => t.id === this.state.currentTrack?.id
+    );
+    const nextIndex = (currentIndex + 1) % currentList.length;
+    this.playTrack(currentList[nextIndex]);
+  }
+
+  playPrevTrack() {
+    const currentList = this.state.currentTrack
+      ? this.state.searchResults
+      : this.state.playlistTracks;
+    if (!currentList || currentList.length === 0) return;
+
+    const currentIndex = currentList.findIndex(
+      (t) => t.id === this.state.currentTrack?.id
+    );
+    const prevIndex =
+      (currentIndex - 1 + currentList.length) % currentList.length;
+    this.playTrack(currentList[prevIndex]);
+  }
+
+  showPlaylistModal(playlistName) {
+    this.setState({ selectedPlaylistName: playlistName });
+  }
+
+  closePlaylistModal() {
+    this.setState({ selectedPlaylistName: null });
+  }
+
   render() {
     return (
       <div className="App">
@@ -233,6 +278,8 @@ class App extends React.Component {
               onPlayPause={this.togglePlayPause}
               volume={this.state.volume}
               onVolumeChange={this.handleVolumeChange}
+              onNextTrack={this.playNextTrack}
+              onPrevTrack={this.playPrevTrack}
             />
           )}
         </div>
@@ -253,7 +300,8 @@ class App extends React.Component {
                   <div key={name} className="playlist-button-group">
                     <button
                       className="playlist-load-btn"
-                      onClick={() => this.loadPlaylist(name)}
+                      onClick={() => this.showPlaylistModal(name)}
+                      title="View playlist"
                     >
                       {name}
                     </button>
@@ -294,6 +342,20 @@ class App extends React.Component {
           isOpen={!!this.state.selectedTrackForModal}
           onClose={this.closeTrackModal}
           onPlay={this.playTrack}
+        />
+
+        <PlaylistViewModal
+          isOpen={!!this.state.selectedPlaylistName}
+          playlist={
+            this.state.selectedPlaylistName
+              ? playlistStorage.getPlaylist(this.state.selectedPlaylistName)
+                  ?.tracks
+              : null
+          }
+          playlistName={this.state.selectedPlaylistName}
+          onClose={this.closePlaylistModal}
+          onPlay={this.playTrack}
+          onShowModal={this.showTrackModal}
         />
       </div>
     );

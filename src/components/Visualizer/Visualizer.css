@@ -75,6 +75,34 @@
   align-items: center;
 }
 
+.player-nav-btn {
+  background: linear-gradient(135deg, rgba(0, 200, 100, 0.2), rgba(0, 150, 100, 0.2));
+  border: 1px solid rgba(0, 200, 100, 0.4);
+  color: #00FF99;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.player-nav-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 200, 100, 0.4), rgba(0, 150, 100, 0.4));
+  box-shadow: 0 0 15px rgba(0, 200, 100, 0.3);
+  border-color: rgba(0, 255, 150, 0.8);
+  transform: scale(1.05);
+}
+
+.player-nav-btn:active {
+  transform: scale(0.95);
+}
+
 .player-play-btn {
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 100, 200, 0.2));
   border: 1px solid rgba(0, 255, 255, 0.4);
