@@ -2,6 +2,8 @@
 
 > Una aplicación moderna y futurista de reproducción de música con interfaz cyberpunk, reproductor de audio funcional y gestión de playlists personalizadas.
 
+**Versión:** 1.0.1
+
 ![Vite](https://img.shields.io/badge/Vite-7.x-purple?style=flat-square)
 ![React](https://img.shields.io/badge/React-19.x-blue?style=flat-square)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square)
