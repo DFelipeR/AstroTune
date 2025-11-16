@@ -287,6 +287,15 @@ class App extends React.Component {
         <div className="app-container">
           <SearchBar onSearch={this.search} />
 
+          <div className="new-playlist-section">
+            <button
+              className="new-playlist-btn-large"
+              onClick={this.newPlaylist}
+            >
+              Create New Playlist
+            </button>
+          </div>
+
           <div className="app-content">
             <SearchResults
               searchResults={this.state.searchResults}
@@ -333,17 +342,6 @@ class App extends React.Component {
                   </div>
                 ))}
               </div>
-            </div>
-          )}
-
-          {this.state.savedPlaylists.length === 0 && (
-            <div className="new-playlist-section">
-              <button
-                className="new-playlist-btn-large"
-                onClick={this.newPlaylist}
-              >
-                Create New Playlist
-              </button>
             </div>
           )}
         </div>
