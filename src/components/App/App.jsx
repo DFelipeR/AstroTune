@@ -350,15 +350,6 @@ class App extends React.Component {
             </div>
           )}
 
-          <div className="new-playlist-section mobile-only">
-            <button
-              className="new-playlist-btn-large"
-              onClick={() => this.openPlaylistCreator()}
-            >
-              Create Playlist
-            </button>
-          </div>
-
           <div className="app-content">
             <SearchResults
               searchResults={this.state.searchResults}
