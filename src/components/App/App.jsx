@@ -287,6 +287,24 @@ class App extends React.Component {
         <div className="app-container">
           <SearchBar onSearch={this.search} />
 
+          <div className="app-content">
+            <SearchResults
+              searchResults={this.state.searchResults}
+              onAdd={this.addTrack}
+              onPlay={this.playTrack}
+              onShowModal={this.showTrackModal}
+            />
+            <Playlist
+              playlistName={this.state.playlistName}
+              playlistTracks={this.state.playlistTracks}
+              onRemove={this.removeTrack}
+              onNameChange={this.updatePlaylistName}
+              onSave={this.savePlaylist}
+              onPlay={this.playTrack}
+              onShowModal={this.showTrackModal}
+            />
+          </div>
+
           {this.state.savedPlaylists.length > 0 && (
             <div className="saved-playlists">
               <div className="playlists-header">
@@ -318,21 +336,13 @@ class App extends React.Component {
             </div>
           )}
 
-          <div className="app-content">
-            <SearchResults
-              searchResults={this.state.searchResults}
-              onAdd={this.addTrack}
-              onPlay={this.playTrack}
-              onShowModal={this.showTrackModal}
-            />
-            <Playlist
-              playlistName={this.state.playlistName}
-              playlistTracks={this.state.playlistTracks}
-              onRemove={this.removeTrack}
-              onNameChange={this.updatePlaylistName}
-              onSave={this.savePlaylist}
-              onPlay={this.playTrack}
-              onShowModal={this.showTrackModal}
+          {this.state.savedPlaylists.length === 0 && (
+            <div className="new-playlist-section">
+              <button className="new-playlist-btn-large" onClick={this.newPlaylist}>
+                Create New Playlist
+              </button>
+            </div>
+          )}
             />
           </div>
         </div>
