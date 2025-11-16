@@ -118,8 +118,8 @@
 
 @media (max-width: 768px) {
   .app-container {
-    padding: 1rem;
-    padding-bottom: 130px;
+    padding: 0.75rem;
+    padding-bottom: 140px;
   }
 }
 
