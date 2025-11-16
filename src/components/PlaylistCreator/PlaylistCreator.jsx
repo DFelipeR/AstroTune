@@ -8,6 +8,7 @@ class PlaylistCreator extends React.Component {
       searchQuery: "",
       filteredTracks: props.allTracks || [],
       activeTab: "new", // "new" or "saved"
+      showNameModal: false, // Show name confirmation modal
     };
   }
 
@@ -29,6 +30,19 @@ class PlaylistCreator extends React.Component {
     this.setState({ activeTab: tab });
   };
 
+  openNameModal = () => {
+    this.setState({ showNameModal: true });
+  };
+
+  closeNameModal = () => {
+    this.setState({ showNameModal: false });
+  };
+
+  savePlaylist = () => {
+    this.props.onSave();
+    this.closeNameModal();
+  };
+
   render() {
     const {
       isOpen,
@@ -47,20 +61,23 @@ class PlaylistCreator extends React.Component {
 
     if (!isOpen) return null;
 
-    const { searchQuery, filteredTracks, activeTab } = this.state;
+    const { searchQuery, filteredTracks, activeTab, showNameModal } =
+      this.state;
     const isTrackSelected = (trackId) =>
       playlistTracks.some((t) => t.id === trackId);
 
     return (
       <div className="playlist-creator-overlay">
         <div className="playlist-creator">
-          {/* Header */}
-          <div className="playlist-creator-header">
-            <h1>Create</h1>
-            <button className="close-btn" onClick={onClose} type="button">
-              ✕
-            </button>
-          </div>
+          {/* Close Button */}
+          <button
+            className="close-btn-top"
+            onClick={onClose}
+            type="button"
+            title="Close"
+          >
+            ✕
+          </button>
 
           {/* Tabs */}
           <div className="playlist-tabs">
@@ -140,30 +157,19 @@ class PlaylistCreator extends React.Component {
 
                 {/* Right: Playlist Settings */}
                 <div className="playlist-settings-section">
-                  {/* Playlist Name */}
-                  <div className="playlist-name-input-group">
-                    <label>Playlist Name:</label>
-                    <input
-                      type="text"
-                      className="playlist-name-field"
-                      value={playlistName}
-                      onChange={(e) => onNameChange(e.target.value)}
-                      placeholder="Enter playlist name"
-                    />
-                  </div>
-
                   {/* Song Count */}
                   <div className="song-count">
                     <p>{playlistTracks.length} Songs Selected</p>
                   </div>
 
-                  {/* Save Button */}
+                  {/* Next Button */}
                   <button
-                    className="save-playlist-btn-large"
-                    onClick={onSave}
+                    className="next-btn"
+                    onClick={this.openNameModal}
                     type="button"
+                    disabled={playlistTracks.length === 0}
                   >
-                    Create Playlist
+                    Next
                   </button>
                 </div>
               </>
@@ -211,6 +217,52 @@ class PlaylistCreator extends React.Component {
               </>
             )}
           </div>
+
+          {/* Name Modal */}
+          {showNameModal && (
+            <div className="name-modal-overlay" onClick={this.closeNameModal}>
+              <div className="name-modal" onClick={(e) => e.stopPropagation()}>
+                <div className="name-modal-header">
+                  <h2>Playlist Name</h2>
+                  <button
+                    className="modal-close-btn"
+                    onClick={this.closeNameModal}
+                    type="button"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="name-modal-content">
+                  <input
+                    type="text"
+                    className="name-input"
+                    value={playlistName}
+                    onChange={(e) => onNameChange(e.target.value)}
+                    placeholder="Enter playlist name"
+                    autoFocus
+                  />
+                </div>
+
+                <div className="name-modal-actions">
+                  <button
+                    className="btn-cancel"
+                    onClick={this.closeNameModal}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="btn-save"
+                    onClick={this.savePlaylist}
+                    type="button"
+                  >
+                    Save Playlist
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );

@@ -37,46 +37,7 @@
   flex-direction: column;
   overflow: hidden;
   backdrop-filter: blur(10px);
-}
-
-.playlist-creator-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem;
-  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
-  gap: 1rem;
-  flex-shrink: 0;
-}
-
-.playlist-creator-header h1 {
-  margin: 0;
-  color: #00FFFF;
-  font-size: 1.5rem;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-.close-btn {
-  background: none;
-  border: 2px solid rgba(255, 0, 100, 0.5);
-  color: #FF0064;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  padding: 0;
-  flex-shrink: 0;
-}
-
-.close-btn:hover {
-  background: rgba(255, 0, 100, 0.2);
-  border-color: rgba(255, 0, 100, 0.8);
-  box-shadow: 0 0 15px rgba(255, 0, 100, 0.5);
+  position: relative;
 }
 
 /* Tabs */
@@ -348,68 +309,15 @@
 }
 
 .playlist-name-input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.playlist-name-input-group label {
-  color: #00FFFF;
-  font-size: 0.9rem;
-  font-weight: 600;
+  display: none;
 }
 
 .playlist-name-field {
-  padding: 0.8rem;
-  border: 2px solid rgba(0, 255, 255, 0.3);
-  border-radius: 8px;
-  background: rgba(0, 10, 30, 0.8);
-  color: #E0E0E0;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.playlist-name-field:focus {
-  outline: none;
-  border-color: rgba(0, 255, 255, 0.8);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-  background: rgba(0, 10, 30, 0.95);
-}
-
-.song-count {
-  padding: 1rem;
-  background: rgba(0, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  border-radius: 8px;
-  text-align: center;
-}
-
-.song-count p {
-  margin: 0;
-  color: #00FFFF;
-  font-size: 1rem;
-  font-weight: 600;
+  display: none;
 }
 
 .save-playlist-btn-large {
-  padding: 1rem;
-  border: 2px solid rgba(0, 255, 255, 0.4);
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 100, 200, 0.1));
-  color: #00FFFF;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.save-playlist-btn-large:hover {
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 100, 200, 0.2));
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-  border-color: rgba(0, 255, 255, 0.8);
-  transform: translateY(-2px);
+  display: none;
 }
 
 /* ========== YOUR PLAYLISTS TAB ========== */
@@ -573,5 +481,205 @@
   .playlist-creator-overlay {
     display: none !important;
   }
+}
+
+/* ============== NAME MODAL STYLES ============== */
+
+.name-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 3001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+  backdrop-filter: blur(5px);
+}
+
+.name-modal {
+  background: linear-gradient(135deg, rgba(0, 20, 60, 0.98), rgba(0, 10, 40, 0.98));
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.05);
+  animation: slideUpFull 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.name-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.name-modal-header h2 {
+  margin: 0;
+  color: #00FFFF;
+  font-size: 1.3rem;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.modal-close-btn {
+  background: none;
+  border: 2px solid rgba(255, 0, 100, 0.5);
+  color: #FF0064;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 0, 100, 0.2);
+  border-color: rgba(255, 0, 100, 0.8);
+  box-shadow: 0 0 15px rgba(255, 0, 100, 0.5);
+  transform: scale(1.1);
+}
+
+.name-modal-content {
+  margin-bottom: 1.5rem;
+}
+
+.name-input {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 4px;
+  color: #00FFFF;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.name-input::placeholder {
+  color: rgba(0, 255, 255, 0.5);
+}
+
+.name-input:focus {
+  outline: none;
+  background: rgba(0, 255, 255, 0.1);
+  border-color: rgba(0, 255, 255, 0.6);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.05);
+}
+
+.name-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-cancel {
+  padding: 0.7rem 1.5rem;
+  background: rgba(255, 100, 100, 0.1);
+  border: 1px solid rgba(255, 100, 100, 0.5);
+  color: #FF6464;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 100, 100, 0.2);
+  border-color: rgba(255, 100, 100, 0.8);
+  box-shadow: 0 0 10px rgba(255, 100, 100, 0.3);
+}
+
+.btn-save {
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 200, 255, 0.2));
+  border: 1px solid rgba(0, 255, 255, 0.6);
+  color: #00FFFF;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.btn-save:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(0, 200, 255, 0.3));
+  border-color: rgba(0, 255, 255, 0.9);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Hide next button when there are no tracks */
+.next-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Ensure next button is visible */
+.next-btn {
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 200, 255, 0.2));
+  border: 1px solid rgba(0, 255, 255, 0.6);
+  color: #00FFFF;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  width: 100%;
+}
+
+.next-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(0, 200, 255, 0.3));
+  border-color: rgba(0, 255, 255, 0.9);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  transform: scale(1.02);
+}
+
+.close-btn-top {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 2px solid rgba(255, 0, 100, 0.5);
+  color: #FF0064;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+  z-index: 1;
+}
+
+.close-btn-top:hover {
+  background: rgba(255, 0, 100, 0.2);
+  border-color: rgba(255, 0, 100, 0.8);
+  box-shadow: 0 0 15px rgba(255, 0, 100, 0.5);
 }
 
