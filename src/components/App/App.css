@@ -121,7 +121,7 @@
   }
 }
 
-/* Sección de playlists guardadas */
+/* Sección de playlists guardadas - Solo visible en PC */
 .saved-playlists {
   background: rgba(0, 30, 60, 0.4);
   border: 1px solid rgba(0, 255, 255, 0.2);

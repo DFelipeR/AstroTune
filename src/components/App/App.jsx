@@ -297,6 +297,37 @@ class App extends React.Component {
         <div className="app-container">
           <SearchBar onSearch={this.search} />
 
+          {this.state.savedPlaylists.length > 0 && (
+            <div className="saved-playlists">
+              <div className="playlists-header">
+                <h3>Your Playlists</h3>
+                <button className="new-playlist-btn" onClick={this.newPlaylist}>
+                  New Playlist
+                </button>
+              </div>
+              <div className="playlist-buttons">
+                {this.state.savedPlaylists.map((name) => (
+                  <div key={name} className="playlist-button-group">
+                    <button
+                      className="playlist-load-btn"
+                      onClick={() => this.showPlaylistModal(name)}
+                      title="View playlist"
+                    >
+                      {name}
+                    </button>
+                    <button
+                      className="playlist-delete-btn"
+                      onClick={() => this.deletePlaylist(name)}
+                      title="Delete"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="new-playlist-section mobile-only">
             <button
               className="new-playlist-btn-large"
@@ -334,38 +365,11 @@ class App extends React.Component {
             onPlay={this.playTrack}
             onShowModal={this.showTrackModal}
             onClose={this.closePlaylistPanel}
+            savedPlaylists={this.state.savedPlaylists}
+            onNewPlaylist={this.newPlaylist}
+            onShowPlaylist={this.showPlaylistModal}
+            onDeletePlaylist={this.deletePlaylist}
           />
-
-          {this.state.savedPlaylists.length > 0 && (
-            <div className="saved-playlists">
-              <div className="playlists-header">
-                <h3>Your Playlists</h3>
-                <button className="new-playlist-btn" onClick={this.newPlaylist}>
-                  New Playlist
-                </button>
-              </div>
-              <div className="playlist-buttons">
-                {this.state.savedPlaylists.map((name) => (
-                  <div key={name} className="playlist-button-group">
-                    <button
-                      className="playlist-load-btn"
-                      onClick={() => this.showPlaylistModal(name)}
-                      title="View playlist"
-                    >
-                      {name}
-                    </button>
-                    <button
-                      className="playlist-delete-btn"
-                      onClick={() => this.deletePlaylist(name)}
-                      title="Delete"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         <TrackModal

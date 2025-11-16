@@ -11,6 +11,10 @@ const PlaylistPanel = ({
   onShowModal,
   isOpen,
   onClose,
+  savedPlaylists = [],
+  onNewPlaylist,
+  onShowPlaylist,
+  onDeletePlaylist,
 }) => {
   if (!isOpen) return null;
 
@@ -19,7 +23,11 @@ const PlaylistPanel = ({
       <div className="playlist-panel" onClick={(e) => e.stopPropagation()}>
         <div className="playlist-panel-header">
           <h2>My Playlist</h2>
-          <button className="playlist-close-btn" onClick={onClose}>
+          <button
+            className="playlist-close-btn"
+            onClick={onClose}
+            type="button"
+          >
             ✕
           </button>
         </div>
@@ -55,6 +63,7 @@ const PlaylistPanel = ({
                       className="remove-btn"
                       onClick={() => onRemove(track)}
                       title="Remove from playlist"
+                      type="button"
                     >
                       ✕
                     </button>
@@ -64,9 +73,45 @@ const PlaylistPanel = ({
             </div>
           </div>
 
-          <button className="save-playlist-btn" onClick={onSave}>
+          <button className="save-playlist-btn" onClick={onSave} type="button">
             Save Playlist
           </button>
+
+          {savedPlaylists && savedPlaylists.length > 0 && (
+            <div className="saved-playlists-section">
+              <div className="saved-playlists-header">
+                <h3>Your Playlists</h3>
+                <button
+                  className="new-playlist-btn-modal"
+                  onClick={onNewPlaylist}
+                  type="button"
+                >
+                  New
+                </button>
+              </div>
+              <div className="saved-playlists-list">
+                {savedPlaylists.map((name) => (
+                  <div key={name} className="saved-playlist-item">
+                    <button
+                      className="view-playlist-btn"
+                      onClick={() => onShowPlaylist(name)}
+                      type="button"
+                    >
+                      {name}
+                    </button>
+                    <button
+                      className="delete-playlist-btn"
+                      onClick={() => onDeletePlaylist(name)}
+                      type="button"
+                      title="Delete"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
