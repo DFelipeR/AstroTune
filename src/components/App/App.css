@@ -110,16 +110,14 @@
 /* Contenedor de contenido (SearchBar + Content) */
 .app-container {
   padding: 2rem;
-  padding-bottom: 110px;
+  padding-bottom: 2rem;
   transition: padding-bottom 0.3s ease;
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
 }
 
 @media (max-width: 768px) {
   .app-container {
     padding: 0.75rem;
-    padding-bottom: 180px;
+    padding-bottom: 1rem;
   }
 }
 

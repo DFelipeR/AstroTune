@@ -266,12 +266,8 @@ const SpotifyBottomPlayer = ({
           <div className="album-placeholder">♪</div>
         </div>
         <div className="player-track-info">
-          <div className="player-track-name">
-            {currentTrack?.name || "No track selected"}
-          </div>
-          <div className="player-track-artist">
-            {currentTrack?.artist || "Select a song to play"}
-          </div>
+          <div className="player-track-name">{currentTrack?.name}</div>
+          <div className="player-track-artist">{currentTrack?.artist}</div>
         </div>
       </div>
 
@@ -280,16 +276,11 @@ const SpotifyBottomPlayer = ({
           className="player-nav-btn"
           onClick={onPrevTrack}
           title="Previous track"
-          disabled={!currentTrack}
         >
           ⏮
         </button>
 
-        <button
-          className="player-play-btn"
-          onClick={handlePlayPause}
-          disabled={!currentTrack}
-        >
+        <button className="player-play-btn" onClick={handlePlayPause}>
           {isPlaying ? "⏸" : "▶"}
         </button>
 
@@ -297,7 +288,6 @@ const SpotifyBottomPlayer = ({
           className="player-nav-btn"
           onClick={onNextTrack}
           title="Next track"
-          disabled={!currentTrack}
         >
           ⏭
         </button>
@@ -324,7 +314,6 @@ const SpotifyBottomPlayer = ({
             style={{
               background: `linear-gradient(to right, #00FFFF 0%, #00FFFF ${progressPercent}%, #1f2937 ${progressPercent}%, #1f2937 100%)`,
             }}
-            disabled={!currentTrack}
           />
           <span className="player-duration">{formatTime(duration)}</span>
         </div>
