@@ -307,6 +307,16 @@
   .app-content {
     gap: 1rem;
   }
+
+  /* Ocultar Playlist sidebar en móvil */
+  .Playlist {
+    display: none;
+  }
+
+  /* SearchResults tomar ancho completo en móvil */
+  .SearchResults {
+    width: 100%;
+  }
 }
 
 /* Player and Visualizer Container */

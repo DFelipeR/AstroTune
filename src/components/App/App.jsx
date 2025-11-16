@@ -3,6 +3,7 @@ import "./App.css";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
+import PlaylistPanel from "../PlaylistPanel/PlaylistPanel";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import Visualizer from "../Visualizer/Visualizer";
 import TrackModal from "../TrackModal/TrackModal";
@@ -25,6 +26,7 @@ class App extends React.Component {
       savedPlaylists: [],
       selectedTrackForModal: null,
       selectedPlaylistName: null,
+      playlistPanelOpen: false,
       useLocalStorage: true, // Use local storage instead of Spotify
     };
     this.addTrack = this.addTrack.bind(this);
@@ -252,6 +254,14 @@ class App extends React.Component {
     this.setState({ selectedPlaylistName: null });
   }
 
+  openPlaylistPanel() {
+    this.setState({ playlistPanelOpen: true });
+  }
+
+  closePlaylistPanel() {
+    this.setState({ playlistPanelOpen: false });
+  }
+
   render() {
     return (
       <div className="App">
@@ -290,9 +300,9 @@ class App extends React.Component {
           <div className="new-playlist-section">
             <button
               className="new-playlist-btn-large"
-              onClick={this.newPlaylist}
+              onClick={() => this.openPlaylistPanel()}
             >
-              Create New Playlist
+              My Playlist
             </button>
           </div>
 
@@ -313,6 +323,18 @@ class App extends React.Component {
               onShowModal={this.showTrackModal}
             />
           </div>
+
+          <PlaylistPanel
+            isOpen={this.state.playlistPanelOpen}
+            playlistName={this.state.playlistName}
+            playlistTracks={this.state.playlistTracks}
+            onNameChange={this.updatePlaylistName}
+            onRemove={this.removeTrack}
+            onSave={this.savePlaylist}
+            onPlay={this.playTrack}
+            onShowModal={this.showTrackModal}
+            onClose={this.closePlaylistPanel}
+          />
 
           {this.state.savedPlaylists.length > 0 && (
             <div className="saved-playlists">
