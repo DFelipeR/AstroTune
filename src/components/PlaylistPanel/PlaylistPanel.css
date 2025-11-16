@@ -216,6 +216,13 @@
   transform: translateY(-2px);
 }
 
+/* Ocultar PlaylistPanel en PC (pantallas > 768px) */
+@media (min-width: 769px) {
+  .playlist-panel-overlay {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .playlist-panel {
     max-width: 100%;

@@ -175,6 +175,10 @@
   backdrop-filter: blur(10px);
 }
 
+.new-playlist-section.mobile-only {
+  display: none;
+}
+
 .new-playlist-btn-large {
   background: linear-gradient(135deg, rgba(0, 200, 100, 0.4), rgba(0, 150, 100, 0.4));
   border: 2px solid rgba(0, 200, 100, 0.6);
@@ -291,8 +295,7 @@
   }
 
   .saved-playlists {
-    padding: 1rem;
-    margin-bottom: 1rem;
+    display: none;
   }
 
   .playlists-header {
@@ -306,6 +309,7 @@
 
   .app-content {
     gap: 1rem;
+    flex-direction: column;
   }
 
   /* Ocultar Playlist sidebar en móvil */
@@ -316,6 +320,11 @@
   /* SearchResults tomar ancho completo en móvil */
   .SearchResults {
     width: 100%;
+  }
+
+  /* Mostrar botón "My Playlist" solo en móvil */
+  .new-playlist-section.mobile-only {
+    display: flex;
   }
 }
 

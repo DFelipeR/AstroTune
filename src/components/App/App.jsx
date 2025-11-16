@@ -297,7 +297,7 @@ class App extends React.Component {
         <div className="app-container">
           <SearchBar onSearch={this.search} />
 
-          <div className="new-playlist-section">
+          <div className="new-playlist-section mobile-only">
             <button
               className="new-playlist-btn-large"
               onClick={() => this.openPlaylistPanel()}
