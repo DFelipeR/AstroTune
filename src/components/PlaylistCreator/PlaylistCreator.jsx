@@ -56,7 +56,7 @@ class PlaylistCreator extends React.Component {
         <div className="playlist-creator">
           {/* Header */}
           <div className="playlist-creator-header">
-            <h1>Crear</h1>
+            <h1>Create</h1>
             <button className="close-btn" onClick={onClose} type="button">
               ✕
             </button>

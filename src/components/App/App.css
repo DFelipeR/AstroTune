@@ -173,6 +173,18 @@
   border-radius: 12px;
   margin: 1rem 0;
   backdrop-filter: blur(10px);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .new-playlist-section.mobile-only {
@@ -298,6 +310,11 @@
     display: none;
   }
 
+  /* Ocultar sección NEW PLAYLIST que no es mobile-only */
+  .new-playlist-section:not(.mobile-only) {
+    display: none;
+  }
+
   .playlists-header {
     flex-direction: column;
     align-items: flex-start;
@@ -322,7 +339,7 @@
     width: 100%;
   }
 
-  /* Mostrar botón "My Playlist" solo en móvil */
+  /* Mostrar botón "Create Playlist" solo en móvil */
   .new-playlist-section.mobile-only {
     display: flex;
   }

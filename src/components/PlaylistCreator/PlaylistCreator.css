@@ -86,13 +86,14 @@
   border-bottom: 2px solid rgba(0, 255, 255, 0.2);
   padding: 0 1.5rem;
   flex-shrink: 0;
+  justify-content: center;
 }
 
 .tab-btn {
   background: none;
   border: none;
   color: #94a3b8;
-  padding: 1rem 1.5rem;
+  padding: 1rem 2rem;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
@@ -104,12 +105,25 @@
 
 .tab-btn:hover {
   color: #00FFFF;
+  transform: translateY(-2px);
 }
 
 .tab-btn.active {
   color: #00FFFF;
   border-bottom-color: #00FFFF;
   box-shadow: 0 -5px 15px rgba(0, 255, 255, 0.3);
+  animation: tabGlow 0.5s ease-out;
+}
+
+@keyframes tabGlow {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .playlist-creator-content {
@@ -117,6 +131,12 @@
   display: flex;
   overflow: hidden;
   gap: 0;
+}
+
+@media (max-width: 600px) {
+  .playlist-creator-content {
+    flex-direction: column;
+  }
 }
 
 /* ========== NEW PLAYLIST TAB ========== */
@@ -130,6 +150,27 @@
   gap: 1rem;
   border-right: 2px solid rgba(0, 255, 255, 0.2);
   min-height: 0;
+  animation: slideInLeft 0.4s ease-out;
+}
+
+@media (max-width: 600px) {
+  .search-tracks-section {
+    border-right: none;
+    border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+    flex: 0 0 auto;
+    max-height: 60vh;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .search-bar-section {
@@ -192,6 +233,18 @@
   transition: all 0.3s ease;
   cursor: pointer;
   user-select: none;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .track-item-creator:hover {
@@ -266,6 +319,32 @@
   gap: 1rem;
   width: 45%;
   overflow-y: auto;
+  animation: slideInRight 0.4s ease-out;
+}
+
+@media (max-width: 900px) {
+  .playlist-settings-section {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .playlist-settings-section {
+    width: 100%;
+    flex: 1;
+    max-height: none;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .playlist-name-input-group {
@@ -342,6 +421,16 @@
   padding: 1.5rem;
   gap: 1.5rem;
   overflow-y: auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .your-playlists-header-tab {
@@ -395,6 +484,18 @@
   border: 2px solid rgba(0, 255, 255, 0.2);
   border-radius: 10px;
   transition: all 0.3s ease;
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .playlist-card:hover {
