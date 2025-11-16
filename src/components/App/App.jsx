@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 import PlaylistPanel from "../PlaylistPanel/PlaylistPanel";
+import PlaylistCreator from "../PlaylistCreator/PlaylistCreator";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import Visualizer from "../Visualizer/Visualizer";
 import TrackModal from "../TrackModal/TrackModal";
@@ -27,6 +28,7 @@ class App extends React.Component {
       selectedTrackForModal: null,
       selectedPlaylistName: null,
       playlistPanelOpen: false,
+      playlistCreatorOpen: false,
       useLocalStorage: true, // Use local storage instead of Spotify
     };
     this.addTrack = this.addTrack.bind(this);
@@ -262,6 +264,26 @@ class App extends React.Component {
     this.setState({ playlistPanelOpen: false });
   }
 
+  openPlaylistCreator() {
+    this.setState({ playlistCreatorOpen: true });
+  }
+
+  closePlaylistCreator() {
+    this.setState({ playlistCreatorOpen: false });
+  }
+
+  addTrackToPlaylist(track) {
+    const { playlistTracks } = this.state;
+    if (!playlistTracks.find((t) => t.id === track.id)) {
+      this.setState({ playlistTracks: [...playlistTracks, track] });
+    }
+    // Abrir PlaylistCreator automáticamente en móvil
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      this.setState({ playlistCreatorOpen: true });
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -331,16 +353,16 @@ class App extends React.Component {
           <div className="new-playlist-section mobile-only">
             <button
               className="new-playlist-btn-large"
-              onClick={() => this.openPlaylistPanel()}
+              onClick={() => this.openPlaylistCreator()}
             >
-              My Playlist
+              Create Playlist
             </button>
           </div>
 
           <div className="app-content">
             <SearchResults
               searchResults={this.state.searchResults}
-              onAdd={this.addTrack}
+              onAdd={this.addTrackToPlaylist.bind(this)}
               onPlay={this.playTrack}
               onShowModal={this.showTrackModal}
             />
@@ -377,6 +399,22 @@ class App extends React.Component {
           isOpen={!!this.state.selectedTrackForModal}
           onClose={this.closeTrackModal}
           onPlay={this.playTrack}
+        />
+
+        <PlaylistCreator
+          isOpen={this.state.playlistCreatorOpen}
+          playlistName={this.state.playlistName}
+          playlistTracks={this.state.playlistTracks}
+          onNameChange={this.updatePlaylistName}
+          onAddTrack={this.addTrackToPlaylist.bind(this)}
+          onRemoveTrack={this.removeTrack}
+          onSave={this.savePlaylist}
+          onClose={this.closePlaylistCreator.bind(this)}
+          allTracks={this.state.searchResults}
+          savedPlaylists={this.state.savedPlaylists}
+          onShowPlaylist={this.showPlaylistModal}
+          onDeletePlaylist={this.deletePlaylist}
+          onNewPlaylist={this.newPlaylist}
         />
 
         <PlaylistViewModal
