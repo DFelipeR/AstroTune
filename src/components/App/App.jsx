@@ -338,13 +338,14 @@ class App extends React.Component {
 
           {this.state.savedPlaylists.length === 0 && (
             <div className="new-playlist-section">
-              <button className="new-playlist-btn-large" onClick={this.newPlaylist}>
+              <button
+                className="new-playlist-btn-large"
+                onClick={this.newPlaylist}
+              >
                 Create New Playlist
               </button>
             </div>
           )}
-            />
-          </div>
         </div>
 
         <TrackModal
