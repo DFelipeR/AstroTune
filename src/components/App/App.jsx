@@ -270,18 +270,16 @@ class App extends React.Component {
         </div>
 
         <div className="player-visualizer-container">
-          {this.state.currentTrack && (
-            <Visualizer
-              audioRef={this.audioRef}
-              currentTrack={this.state.currentTrack}
-              isPlaying={this.state.isPlaying}
-              onPlayPause={this.togglePlayPause}
-              volume={this.state.volume}
-              onVolumeChange={this.handleVolumeChange}
-              onNextTrack={this.playNextTrack}
-              onPrevTrack={this.playPrevTrack}
-            />
-          )}
+          <Visualizer
+            audioRef={this.audioRef}
+            currentTrack={this.state.currentTrack}
+            isPlaying={this.state.isPlaying}
+            onPlayPause={this.togglePlayPause}
+            volume={this.state.volume}
+            onVolumeChange={this.handleVolumeChange}
+            onNextTrack={this.playNextTrack}
+            onPrevTrack={this.playPrevTrack}
+          />
         </div>
 
         <div className="app-container">
