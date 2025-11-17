@@ -8,7 +8,9 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.9);
   z-index: 3000;
-  display: none;
+  display: flex;
+  align-items: flex-end;
+  animation: slideUpFull 0.3s ease-out;
 }
 
 /* Only show on mobile */
@@ -17,6 +19,13 @@
     display: flex;
     align-items: flex-end;
     animation: slideUpFull 0.3s ease-out;
+  }
+}
+
+/* Hide on desktop */
+@media (min-width: 769px) {
+  .playlist-creator-overlay {
+    display: none !important;
   }
 }
 
