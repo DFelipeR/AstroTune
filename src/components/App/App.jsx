@@ -318,7 +318,10 @@ class App extends React.Component {
         </div>
 
         {/* Mobile floating button for creating playlists */}
-        <button className="mobile-create-playlist-btn" onClick={this.newPlaylist}>
+        <button
+          className="mobile-create-playlist-btn"
+          onClick={this.newPlaylist}
+        >
           +
         </button>
 
@@ -407,7 +410,7 @@ class App extends React.Component {
           onRemoveTrack={this.removeTrack}
           onSave={this.savePlaylist}
           onClose={this.closePlaylistCreator.bind(this)}
-          allTracks={this.state.searchResults}
+          allTracks={mockTracks}
           savedPlaylists={this.state.savedPlaylists}
           onShowPlaylist={this.showPlaylistModal}
           onDeletePlaylist={this.deletePlaylist}
