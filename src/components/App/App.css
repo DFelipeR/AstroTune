@@ -156,6 +156,7 @@
   font-weight: 600;
   transition: all 0.3s ease;
   white-space: nowrap;
+  display: none; /* Hide on desktop - use Playlist component instead */
 }
 
 .new-playlist-btn:hover {
@@ -277,6 +278,11 @@
   /* SearchResults tomar ancho completo en móvil */
   .SearchResults {
     width: 100%;
+  }
+
+  /* Show "New Playlist" button in mobile header only */
+  .new-playlist-btn {
+    display: inline-block !important;
   }
 
   /* Mobile floating button - visible only on mobile */
