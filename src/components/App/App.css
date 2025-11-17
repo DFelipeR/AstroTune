@@ -217,6 +217,11 @@
   align-items: flex-start;          /* Alinear desde arriba */
 }
 
+/* Mobile floating button - hidden by default on desktop */
+.mobile-create-playlist-btn {
+  display: none !important;
+}
+
 /* Para pantallas pequeñas */
 @media (max-width: 1200px) {
   .app-content {
@@ -272,6 +277,38 @@
   /* SearchResults tomar ancho completo en móvil */
   .SearchResults {
     width: 100%;
+  }
+
+  /* Mobile floating button - visible only on mobile */
+  .mobile-create-playlist-btn {
+    display: flex;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(0, 200, 100, 0.6), rgba(0, 150, 100, 0.6));
+    border: 2px solid #00FF99;
+    border-radius: 50%;
+    color: #00FF99;
+    font-size: 2rem;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 200, 100, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-create-playlist-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 200, 100, 0.8), rgba(0, 150, 100, 0.8));
+    box-shadow: 0 0 30px rgba(0, 200, 100, 0.7);
+    transform: scale(1.1);
+  }
+
+  .mobile-create-playlist-btn:active {
+    transform: scale(0.95);
   }
 }
 

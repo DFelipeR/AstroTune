@@ -317,6 +317,11 @@ class App extends React.Component {
           )}
         </div>
 
+        {/* Mobile floating button for creating playlists */}
+        <button className="mobile-create-playlist-btn" onClick={this.newPlaylist}>
+          +
+        </button>
+
         <div className="app-container">
           <SearchBar onSearch={this.search} />
 
