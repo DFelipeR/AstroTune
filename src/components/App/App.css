@@ -273,8 +273,9 @@
   .SearchResults {
     width: 100%;
   }
+}
 
-  /* Player and Visualizer Container */
+/* Player and Visualizer Container */
 .player-visualizer-container {
   display: flex;
   flex-direction: column;
