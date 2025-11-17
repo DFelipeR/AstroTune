@@ -6,7 +6,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_1.mp3",
+    previewUrl: "/AstroTune/audio/track_1.mp3",
   },
   {
     id: "2",
@@ -14,7 +14,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_2.mp3",
+    previewUrl: "/AstroTune/audio/track_2.mp3",
   },
   {
     id: "3",
@@ -22,7 +22,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_3.mp3",
+    previewUrl: "/AstroTune/audio/track_3.mp3",
   },
   {
     id: "4",
@@ -30,7 +30,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_4.mp3",
+    previewUrl: "/AstroTune/audio/track_4.mp3",
   },
   {
     id: "5",
@@ -38,7 +38,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_5.mp3",
+    previewUrl: "/AstroTune/audio/track_5.mp3",
   },
   {
     id: "6",
@@ -46,7 +46,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_6.mp3",
+    previewUrl: "/AstroTune/audio/track_6.mp3",
   },
   {
     id: "7",
@@ -54,7 +54,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_7.mp3",
+    previewUrl: "/AstroTune/audio/track_7.mp3",
   },
   {
     id: "8",
@@ -62,7 +62,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_8.mp3",
+    previewUrl: "/AstroTune/audio/track_8.mp3",
   },
   {
     id: "9",
@@ -70,7 +70,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_9.mp3",
+    previewUrl: "/AstroTune/audio/track_9.mp3",
   },
   {
     id: "10",
@@ -78,7 +78,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_10.mp3",
+    previewUrl: "/AstroTune/audio/track_10.mp3",
   },
   {
     id: "11",
@@ -86,7 +86,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_11.mp3",
+    previewUrl: "/AstroTune/audio/track_11.mp3",
   },
   {
     id: "12",
@@ -94,7 +94,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_12.mp3",
+    previewUrl: "/AstroTune/audio/track_12.mp3",
   },
   {
     id: "13",
@@ -102,7 +102,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_13.mp3",
+    previewUrl: "/AstroTune/audio/track_13.mp3",
   },
   {
     id: "14",
@@ -110,7 +110,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_14.mp3",
+    previewUrl: "/AstroTune/audio/track_14.mp3",
   },
   {
     id: "15",
@@ -118,7 +118,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_15.mp3",
+    previewUrl: "/AstroTune/audio/track_15.mp3",
   },
   {
     id: "16",
@@ -126,7 +126,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_16.mp3",
+    previewUrl: "/AstroTune/audio/track_16.mp3",
   },
   {
     id: "17",
@@ -134,7 +134,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_17.mp3",
+    previewUrl: "/AstroTune/audio/track_17.mp3",
   },
   {
     id: "18",
@@ -142,7 +142,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_18.mp3",
+    previewUrl: "/AstroTune/audio/track_18.mp3",
   },
   {
     id: "19",
@@ -150,7 +150,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_19.mp3",
+    previewUrl: "/AstroTune/audio/track_19.mp3",
   },
   {
     id: "20",
@@ -158,7 +158,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_20.mp3",
+    previewUrl: "/AstroTune/audio/track_20.mp3",
   },
   {
     id: "21",
@@ -166,7 +166,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_21.mp3",
+    previewUrl: "/AstroTune/audio/track_21.mp3",
   },
   {
     id: "22",
@@ -174,7 +174,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_22.mp3",
+    previewUrl: "/AstroTune/audio/track_22.mp3",
   },
   {
     id: "23",
@@ -182,7 +182,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_23.mp3",
+    previewUrl: "/AstroTune/audio/track_23.mp3",
   },
   {
     id: "24",
@@ -190,7 +190,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_24.mp3",
+    previewUrl: "/AstroTune/audio/track_24.mp3",
   },
   {
     id: "25",
@@ -198,7 +198,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_25.mp3",
+    previewUrl: "/AstroTune/audio/track_25.mp3",
   },
   {
     id: "26",
@@ -206,7 +206,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_26.mp3",
+    previewUrl: "/AstroTune/audio/track_26.mp3",
   },
   {
     id: "27",
@@ -214,7 +214,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_27.mp3",
+    previewUrl: "/AstroTune/audio/track_27.mp3",
   },
   {
     id: "28",
@@ -222,7 +222,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_28.mp3",
+    previewUrl: "/AstroTune/audio/track_28.mp3",
   },
   {
     id: "29",
@@ -230,7 +230,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_29.mp3",
+    previewUrl: "/AstroTune/audio/track_29.mp3",
   },
   {
     id: "30",
@@ -238,7 +238,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_30.mp3",
+    previewUrl: "/AstroTune/audio/track_30.mp3",
   },
   {
     id: "31",
@@ -246,7 +246,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_31.mp3",
+    previewUrl: "/AstroTune/audio/track_31.mp3",
   },
   {
     id: "32",
@@ -254,7 +254,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_32.mp3",
+    previewUrl: "/AstroTune/audio/track_32.mp3",
   },
   {
     id: "33",
@@ -262,7 +262,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_33.mp3",
+    previewUrl: "/AstroTune/audio/track_33.mp3",
   },
   {
     id: "34",
@@ -270,7 +270,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_34.mp3",
+    previewUrl: "/AstroTune/audio/track_34.mp3",
   },
   {
     id: "35",
@@ -278,7 +278,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_35.mp3",
+    previewUrl: "/AstroTune/audio/track_35.mp3",
   },
   {
     id: "36",
@@ -286,7 +286,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_36.mp3",
+    previewUrl: "/AstroTune/audio/track_36.mp3",
   },
   {
     id: "37",
@@ -294,7 +294,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_37.mp3",
+    previewUrl: "/AstroTune/audio/track_37.mp3",
   },
   {
     id: "38",
@@ -302,7 +302,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_38.mp3",
+    previewUrl: "/AstroTune/audio/track_38.mp3",
   },
   {
     id: "39",
@@ -310,7 +310,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_39.mp3",
+    previewUrl: "/AstroTune/audio/track_39.mp3",
   },
   {
     id: "40",
@@ -318,7 +318,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_40.mp3",
+    previewUrl: "/AstroTune/audio/track_40.mp3",
   },
   {
     id: "41",
@@ -326,7 +326,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_41.mp3",
+    previewUrl: "/AstroTune/audio/track_41.mp3",
   },
   {
     id: "42",
@@ -334,7 +334,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_42.mp3",
+    previewUrl: "/AstroTune/audio/track_42.mp3",
   },
   {
     id: "43",
@@ -342,7 +342,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_43.mp3",
+    previewUrl: "/AstroTune/audio/track_43.mp3",
   },
   {
     id: "44",
@@ -350,7 +350,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_44.mp3",
+    previewUrl: "/AstroTune/audio/track_44.mp3",
   },
   {
     id: "45",
@@ -358,7 +358,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_45.mp3",
+    previewUrl: "/AstroTune/audio/track_45.mp3",
   },
   {
     id: "46",
@@ -366,7 +366,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_46.mp3",
+    previewUrl: "/AstroTune/audio/track_46.mp3",
   },
   {
     id: "47",
@@ -374,7 +374,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_47.mp3",
+    previewUrl: "/AstroTune/audio/track_47.mp3",
   },
   {
     id: "48",
@@ -382,7 +382,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_48.mp3",
+    previewUrl: "/AstroTune/audio/track_48.mp3",
   },
   {
     id: "49",
@@ -390,7 +390,7 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_49.mp3",
+    previewUrl: "/AstroTune/audio/track_49.mp3",
   },
   {
     id: "50",
@@ -398,6 +398,6 @@ export const mockTracks = [
     artist: "Artist",
     album: "Album",
     duration: 180,
-    previewUrl: "/audio/track_50.mp3",
+    previewUrl: "/AstroTune/audio/track_50.mp3",
   },
 ];
