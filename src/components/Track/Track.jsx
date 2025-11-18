@@ -1,41 +1,35 @@
-﻿import React from "react";
+﻿import React, { useState } from "react";
 import "./Track.css";
 
-class Track extends React.Component {
-  constructor(props) {
-    super(props);
-    this.addTrack = this.addTrack.bind(this);
-    this.removeTrack = this.removeTrack.bind(this);
-    this.playTrack = this.playTrack.bind(this);
-    this.showModal = this.showModal.bind(this);
-  }
+const Track = ({ track, onAdd, onRemove, isRemoval, onPlay, onShowModal }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  addTrack() {
-    this.props.onAdd(this.props.track);
-  }
+  const addTrack = () => {
+    onAdd(track);
+  };
 
-  removeTrack() {
-    this.props.onRemove(this.props.track);
-  }
+  const removeTrack = () => {
+    onRemove(track);
+  };
 
-  playTrack() {
-    if (this.props.onPlay) {
-      this.props.onPlay(this.props.track);
+  const playTrack = () => {
+    if (onPlay) {
+      onPlay(track);
     }
-  }
+  };
 
-  showModal() {
-    if (this.props.onShowModal) {
-      this.props.onShowModal(this.props.track);
+  const showModal = () => {
+    if (onShowModal) {
+      onShowModal(track);
     }
-  }
+  };
 
-  renderAction() {
-    if (this.props.isRemoval) {
+  const renderAction = () => {
+    if (isRemoval) {
       return (
         <button
           className="Track-action"
-          onClick={this.removeTrack}
+          onClick={removeTrack}
           title="Remove from playlist"
         >
           ✕
@@ -45,45 +39,49 @@ class Track extends React.Component {
     return (
       <button
         className="Track-action"
-        onClick={this.addTrack}
+        onClick={addTrack}
         title="Add to playlist"
       >
         +
       </button>
     );
-  }
+  };
 
-  render() {
-    return (
-      <div className="Track">
-        <div
-          className="Track-album-art"
-          onClick={this.showModal}
-          title="Click to view details"
-        >
-          <div className="album-note">♪</div>
-        </div>
-        <div
-          className="Track-information"
-          onClick={this.showModal}
-          style={{ cursor: "pointer" }}
-        >
-          <h3>{this.props.track.name}</h3>
-          <p>
-            {this.props.track.artist} | {this.props.track.album}
-          </p>
-        </div>
-        <button
-          className="Track-play"
-          onClick={this.playTrack}
-          title="Play preview"
-        >
-          ▶
-        </button>
-        {this.renderAction()}
+  return (
+    <div className="Track">
+      <div
+        className="Track-album-art"
+        onClick={showModal}
+        title="Click to view details"
+      >
+        {track.imageUrl ? (
+          <img
+            src={track.imageUrl}
+            alt={track.album}
+            className="album-art-image"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(false)}
+            style={{ display: imageLoaded ? "block" : "none" }}
+          />
+        ) : null}
+        {!imageLoaded && <div className="album-note">♪</div>}
       </div>
-    );
-  }
-}
+      <div
+        className="Track-information"
+        onClick={showModal}
+        style={{ cursor: "pointer" }}
+      >
+        <h3>{track.name}</h3>
+        <p>
+          {track.artist} | {track.album}
+        </p>
+      </div>
+      <button className="Track-play" onClick={playTrack} title="Play preview">
+        ▶
+      </button>
+      {renderAction()}
+    </div>
+  );
+};
 
 export default Track;

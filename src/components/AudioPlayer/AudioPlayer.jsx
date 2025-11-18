@@ -186,11 +186,17 @@ const AudioPlayer = ({
       </div>
 
       <div className="AudioPlayer-controls">
+        <button className="AudioPlayer-skip-btn" title="Previous">
+          ⏮
+        </button>
         <button
           className={`AudioPlayer-button ${isPlaying ? "playing" : ""}`}
           onClick={handlePlayPause}
         >
           {isPlaying ? "⏸" : "▶"}
+        </button>
+        <button className="AudioPlayer-skip-btn" title="Next">
+          ⏭
         </button>
       </div>
 

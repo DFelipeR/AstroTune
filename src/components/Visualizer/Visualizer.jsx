@@ -1,343 +1,288 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Visualizer.css";
 
-const SpotifyBottomPlayer = ({
-  audioRef,
-  currentTrack,
-  isPlaying,
-  onPlayPause,
-  volume,
-  onVolumeChange,
-  onNextTrack,
-  onPrevTrack,
-}) => {
+const Visualizer = ({ audioRef, isPlaying, onAudioData }) => {
   const canvasRef = useRef(null);
-  const sliderRef = useRef(null);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const animationFrameRef = useRef(null);
-  const visualizerAnimRef = useRef(null);
+  const animationRef = useRef(null);
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
   const sourceRef = useRef(null);
+  const dataArrayRef = useRef(null);
 
-  // Inicializar Web Audio API - más robusto
-  const initAudioContext = useCallback(() => {
-    if (audioContextRef.current || !audioRef?.current) return;
-
-    try {
-      const audioElement = audioRef.current;
-      let context = audioContextRef.current;
-
-      if (!context) {
-        context = new (window.AudioContext || window.webkitAudioContext)();
-        audioContextRef.current = context;
-      }
-
-      if (context.state === "suspended") {
-        context.resume().catch(() => {});
-      }
-
-      // Solo crear source una vez
-      if (!sourceRef.current) {
-        try {
-          const source = context.createMediaElementAudioSource(audioElement);
-          const analyser = context.createAnalyser();
-          analyser.fftSize = 256;
-          analyser.smoothingTimeConstant = 0.8;
-
-          source.connect(analyser);
-          analyser.connect(context.destination);
-
-          analyserRef.current = analyser;
-          sourceRef.current = source;
-
-          console.log("Web Audio API inicializado correctamente");
-        } catch (sourceError) {
-          console.error("Error conectando source:", sourceError.message);
-          // Fallback: crear analyser sin source
-          const analyser = context.createAnalyser();
-          analyser.fftSize = 256;
-          analyserRef.current = analyser;
-        }
-      }
-    } catch (e) {
-      console.error("Error en Web Audio:", e.message);
-    }
-  }, [audioRef]);
-
-  // Update smooth progress
-  const updateProgressSmooth = useCallback(() => {
-    if (audioRef?.current && isPlaying) {
-      const currentTimeValue = audioRef.current.currentTime;
-      setCurrentTime(currentTimeValue);
-      if (sliderRef.current) {
-        sliderRef.current.value = currentTimeValue;
-      }
-      animationFrameRef.current = requestAnimationFrame(updateProgressSmooth);
-    }
-  }, [isPlaying, audioRef]);
-
-  // Setup visualizer - FIXED VERSION
-  useEffect(() => {
-    if (!audioRef?.current || !canvasRef.current) return;
-
-    const audio = audioRef.current;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    // Inicializar Web Audio una sola vez
-    initAudioContext();
-
-    let animationPhase = 0;
-    let isDrawing = false;
-
-    const draw = () => {
-      // Siempre continuar dibujando
-      visualizerAnimRef.current = requestAnimationFrame(draw);
-
-      // Limpiar canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const barCount = 128;
-      const barWidth = canvas.width / barCount;
-      const maxHeight = canvas.height * 0.7;
-
-      let dataArray = new Uint8Array(barCount);
-
-      // Modo 1: Si Web Audio funciona
-      if (analyserRef.current) {
-        try {
-          analyserRef.current.getByteFrequencyData(dataArray);
-          // Si todos los valores son 0, usar fallback
-          if (dataArray.every((v) => v === 0)) {
-            // Usar animacion sinusoidal cuando no hay audio
-            const timeProgression = (audio.currentTime || 0) * 2;
-            for (let i = 0; i < barCount; i++) {
-              const offset = (i / barCount) * Math.PI * 2;
-              dataArray[i] = Math.sin(timeProgression + offset) * 40 + 40;
-            }
-          }
-        } catch (e) {
-          // Error en analyser, usar fallback
-          for (let i = 0; i < barCount; i++) {
-            dataArray[i] = Math.sin((i + animationPhase) * 0.05) * 60 + 30;
-          }
-          animationPhase += 0.3;
-        }
-      } else {
-        // Modo 2: Sin Web Audio - animacion pura
-        const timeProgression = (audio.currentTime || 0) * 2;
-        for (let i = 0; i < barCount; i++) {
-          const offset = (i / barCount) * Math.PI * 2;
-          dataArray[i] = Math.sin(timeProgression + offset) * 60 + 40;
-        }
-      }
-
-      // Dibujar barras
-      for (let i = 0; i < barCount; i++) {
-        const value = Math.max(0, dataArray[i]);
-        const barHeight = (value / 255) * maxHeight;
-
-        ctx.fillStyle = "hsl(180, 100%, 50%)";
-
-        const x = i * barWidth + 1;
-        const y = canvas.height - barHeight;
-        const w = barWidth - 2;
-        const h = barHeight;
-        const r = Math.min(w / 2, 3);
-
-        // Dibujar barra con bordes redondeados
-        ctx.beginPath();
-        ctx.moveTo(x + r, y);
-        ctx.lineTo(x + w - r, y);
-        if (h > 0) {
-          ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-          ctx.lineTo(x + w, y + h - r);
-          ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-        } else {
-          ctx.lineTo(x + w, y);
-        }
-        ctx.lineTo(x + r, y + h);
-        if (h > 0) {
-          ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-          ctx.lineTo(x, y + r);
-          ctx.quadraticCurveTo(x, y, x + r, y);
-        } else {
-          ctx.lineTo(x, y);
-        }
-        ctx.fill();
-      }
-    };
-
-    // Iniciar animacion
-    draw();
-
-    // Resume audio context on first interaction
-    const resumeAudio = () => {
-      if (audioContextRef.current?.state === "suspended") {
-        audioContextRef.current.resume().catch(() => {});
-      }
-    };
-
-    document.addEventListener("click", resumeAudio);
-
-    return () => {
-      if (visualizerAnimRef.current) {
-        cancelAnimationFrame(visualizerAnimRef.current);
-      }
-      document.removeEventListener("click", resumeAudio);
-    };
-  }, [audioRef, initAudioContext]);
-
-  // Update smooth progress
-  useEffect(() => {
-    if (isPlaying) {
-      animationFrameRef.current = requestAnimationFrame(updateProgressSmooth);
-    }
-    return () => {
-      if (animationFrameRef.current)
-        cancelAnimationFrame(animationFrameRef.current);
-    };
-  }, [isPlaying, updateProgressSmooth]);
-
-  // Handle audio events
+  // Initialize Web Audio API
   useEffect(() => {
     if (!audioRef?.current) return;
 
-    const audio = audioRef.current;
+    const setupAudio = async () => {
+      try {
+        // Create AudioContext globally (shared across component instances)
+        if (!window.globalAudioContext) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          window.globalAudioContext = new AudioContext();
+        }
+        audioContextRef.current = window.globalAudioContext;
 
-    const handleLoadedMetadata = () => {
-      setDuration(audio.duration);
-    };
+        // Create analyser for this instance
+        const analyser = audioContextRef.current.createAnalyser();
+        analyser.fftSize = 1024;
+        analyser.smoothingTimeConstant = 0.8;
+        analyserRef.current = analyser;
+        dataArrayRef.current = new Uint8Array(analyser.frequencyBinCount);
 
-    const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-      if (sliderRef.current) {
-        sliderRef.current.value = audio.currentTime;
+        // Connect source only if not already connected
+        if (!window.globalAudioSource) {
+          try {
+            const source = audioContextRef.current.createMediaElementSource(
+              audioRef.current
+            );
+            window.globalAudioSource = source;
+            console.log("✓ Audio source created");
+          } catch (err) {
+            // Already connected, use existing
+            console.log("Using existing audio source");
+          }
+        }
+
+        // Connect this analyser to the shared source
+        if (window.globalAudioSource) {
+          sourceRef.current = window.globalAudioSource;
+          sourceRef.current.connect(analyser);
+          analyser.connect(audioContextRef.current.destination);
+          console.log("✓ Analyser connected");
+        }
+
+        // Resume context
+        if (audioContextRef.current.state === "suspended") {
+          await audioContextRef.current.resume();
+        }
+      } catch (error) {
+        console.error("Audio setup error:", error);
       }
     };
 
-    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
-    audio.addEventListener("timeupdate", handleTimeUpdate);
+    setupAudio();
+
+    // Resume on play
+    const handlePlay = () => {
+      if (audioContextRef.current?.state === "suspended") {
+        audioContextRef.current.resume();
+      }
+    };
+
+    audioRef.current.addEventListener("play", handlePlay);
 
     return () => {
-      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audioRef.current?.removeEventListener("play", handlePlay);
     };
   }, [audioRef]);
 
-  // Handle volume
+  // Draw visualizer - starts immediately and runs continuously
   useEffect(() => {
-    if (audioRef?.current) {
-      audioRef.current.volume = volume;
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    const setCanvasSize = () => {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width > 100 && rect.height > 50) {
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+    };
+
+    // Initial size
+    setCanvasSize();
+
+    // Retry sizing if canvas is 0
+    if (canvas.width === 0 || canvas.height === 0) {
+      setTimeout(setCanvasSize, 100);
+      setTimeout(setCanvasSize, 300);
+      setTimeout(setCanvasSize, 500);
     }
-  }, [volume, audioRef]);
 
-  const handlePlayPause = () => {
-    onPlayPause();
-  };
+    window.addEventListener("resize", setCanvasSize);
 
-  const handleProgressChange = (e) => {
-    const newTime = parseFloat(e.target.value);
-    if (audioRef?.current) {
-      audioRef.current.currentTime = newTime;
-    }
-  };
+    let phase = 0;
+    let isActive = true;
+    let frameCount = 0;
 
-  const handleVolumeChange = (e) => {
-    const newVolume = parseFloat(e.target.value);
-    if (onVolumeChange) onVolumeChange(newVolume);
-  };
+    console.log("🎨 Visualizer starting...");
 
-  const formatTime = (seconds) => {
-    if (!seconds || isNaN(seconds)) return "0:00";
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-  };
+    const draw = () => {
+      if (!isActive) return;
+      animationRef.current = requestAnimationFrame(draw);
 
-  const progressPercent = duration ? (currentTime / duration) * 100 : 0;
+      frameCount++;
+
+      // Get current canvas size on every frame
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 50) {
+        // Require at least 50px height
+        if (canvas.width !== rect.width || canvas.height !== rect.height) {
+          canvas.width = rect.width;
+          canvas.height = rect.height;
+        }
+      }
+
+      const { width, height } = canvas;
+
+      // Skip frame if canvas too small
+      if (width < 100 || height < 50) {
+        return;
+      }
+
+      // Clear canvas
+      const gradient = ctx.createLinearGradient(0, 0, 0, height);
+      gradient.addColorStop(0, "rgba(10, 10, 31, 0.3)");
+      gradient.addColorStop(1, "rgba(26, 26, 63, 0.3)");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      const barCount = 80;
+      const barWidth = (width / barCount) * 0.75;
+      const gap = (width / barCount) * 0.25;
+
+      let bars = new Uint8Array(barCount);
+      let bass = 0.2;
+      let mid = 0.2;
+      let treble = 0.2;
+
+      // Always increment phase for continuous animation
+      phase += 0.1;
+
+      // Generate bars based on state
+      if (isPlaying) {
+        // When playing, ALWAYS show something
+        let gotAudio = false;
+
+        if (analyserRef.current) {
+          try {
+            const data = dataArrayRef.current;
+            analyserRef.current.getByteFrequencyData(data);
+
+            // Process frequency data
+            for (let i = 0; i < barCount; i++) {
+              const idx = Math.floor((i / barCount) * data.length);
+              let val = data[idx];
+
+              // Moderate boost for natural look
+              if (i >= barCount * 0.65) val = Math.min(255, val * 2.0);
+              else if (i >= barCount * 0.3) val = Math.min(255, val * 1.5);
+              else val = Math.min(255, val * 1.2);
+
+              bars[i] = Math.max(val, 15);
+            }
+            gotAudio = true;
+          } catch (err) {
+            gotAudio = false;
+          }
+        }
+
+        // If no audio, force wave animation
+        if (!gotAudio) {
+          for (let i = 0; i < barCount; i++) {
+            const offset = (i / barCount) * Math.PI * 4;
+            bars[i] = Math.abs(Math.sin(phase + offset)) * 150 + 40;
+          }
+        }
+
+        // Calculate levels (always when playing)
+        const b = Math.floor(barCount * 0.3);
+        const m = Math.floor(barCount * 0.65);
+
+        let bSum = 0,
+          mSum = 0,
+          tSum = 0;
+        for (let i = 0; i < b; i++) bSum += bars[i];
+        for (let i = b; i < m; i++) mSum += bars[i];
+        for (let i = m; i < barCount; i++) tSum += bars[i];
+
+        bass = Math.max(bSum / b / 255, 0.3);
+        mid = Math.max(mSum / (m - b) / 255, 0.3);
+        treble = Math.max(tSum / (barCount - m) / 255, 0.3);
+      } else {
+        // Fallback wave animation when not playing
+        const intensity = isPlaying ? 100 : 40;
+        const base = isPlaying ? 25 : 15;
+
+        for (let i = 0; i < barCount; i++) {
+          const offset = (i / barCount) * Math.PI * 4;
+          bars[i] = Math.abs(Math.sin(phase + offset)) * intensity + base;
+        }
+
+        bass = Math.abs(Math.sin(phase)) * 0.3;
+        mid = Math.abs(Math.sin(phase + 1)) * 0.3;
+        treble = Math.abs(Math.sin(phase + 2)) * 0.3;
+      }
+
+      // Send data to parent
+      if (onAudioData) {
+        onAudioData({ bassLevel: bass, midLevel: mid, trebleLevel: treble });
+      }
+
+      // Draw bars
+      for (let i = 0; i < barCount; i++) {
+        const value = bars[i];
+        const h = Math.min((value / 255) * height * 0.85, height);
+        const barHeight = Math.max(h, 4);
+
+        const x = i * (barWidth + gap);
+        const y = height - barHeight;
+
+        const grad = ctx.createLinearGradient(x, height, x, y);
+
+        if (i < barCount * 0.3) {
+          grad.addColorStop(0, "rgba(255, 0, 100, 0.7)");
+          grad.addColorStop(1, "rgba(255, 0, 200, 1)");
+          ctx.shadowColor = "#FF0064";
+        } else if (i < barCount * 0.65) {
+          grad.addColorStop(0, "rgba(102, 0, 255, 0.7)");
+          grad.addColorStop(1, "rgba(153, 51, 255, 1)");
+          ctx.shadowColor = "#6600FF";
+        } else {
+          grad.addColorStop(0, "rgba(0, 255, 255, 0.7)");
+          grad.addColorStop(1, "rgba(0, 200, 255, 1)");
+          ctx.shadowColor = "#00FFFF";
+        }
+
+        ctx.fillStyle = grad;
+        ctx.shadowBlur = isPlaying ? 10 : 5;
+
+        const r = Math.min(barWidth / 2, 3);
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + barWidth - r, y);
+        ctx.quadraticCurveTo(x + barWidth, y, x + barWidth, y + r);
+        ctx.lineTo(x + barWidth, height - r);
+        ctx.quadraticCurveTo(x + barWidth, height, x + barWidth - r, height);
+        ctx.lineTo(x + r, height);
+        ctx.quadraticCurveTo(x, height, x, height - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      ctx.shadowBlur = 0;
+    };
+
+    draw();
+
+    return () => {
+      isActive = false;
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      window.removeEventListener("resize", setCanvasSize);
+    };
+  }, []); // Empty dependencies - runs once and animates forever
 
   return (
-    <div className="spotify-player">
-      <div className="player-left">
-        <div className="player-album-art">
-          <div className="album-placeholder">♪</div>
-        </div>
-        <div className="player-track-info">
-          <div className="player-track-name">{currentTrack?.name}</div>
-          <div className="player-track-artist">{currentTrack?.artist}</div>
-        </div>
-      </div>
-
-      <div className="player-center">
-        <button
-          className="player-nav-btn"
-          onClick={onPrevTrack}
-          title="Previous track"
-        >
-          ⏮
-        </button>
-
-        <button className="player-play-btn" onClick={handlePlayPause}>
-          {isPlaying ? "⏸" : "▶"}
-        </button>
-
-        <button
-          className="player-nav-btn"
-          onClick={onNextTrack}
-          title="Next track"
-        >
-          ⏭
-        </button>
-
-        <div className="player-visualizer">
-          <canvas
-            ref={canvasRef}
-            width={400}
-            height={60}
-            className="player-canvas"
-          />
-        </div>
-
-        <div className="player-progress-section">
-          <span className="player-time">{formatTime(currentTime)}</span>
-          <input
-            ref={sliderRef}
-            type="range"
-            min="0"
-            max={duration || 0}
-            value={currentTime}
-            onChange={handleProgressChange}
-            className="player-progress-slider"
-            style={{
-              background: `linear-gradient(to right, #00FFFF 0%, #00FFFF ${progressPercent}%, #1f2937 ${progressPercent}%, #1f2937 100%)`,
-            }}
-          />
-          <span className="player-duration">{formatTime(duration)}</span>
-        </div>
-      </div>
-
-      <div className="player-right">
-        <button className="player-btn volume-btn">🔊</button>
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.1"
-          value={volume}
-          onChange={handleVolumeChange}
-          className="player-volume-slider"
-          style={{
-            background: `linear-gradient(to right, #00FFFF 0%, #00FFFF ${
-              volume * 100
-            }%, #1f2937 ${volume * 100}%, #1f2937 100%)`,
-          }}
-        />
-      </div>
+    <div className="Visualizer">
+      <canvas ref={canvasRef} className="Visualizer-canvas" />
     </div>
   );
 };
 
-export default SpotifyBottomPlayer;
+export default Visualizer;

@@ -68,7 +68,19 @@ export const playlistStorage = {
   // Get current playlist being edited
   getCurrentPlaylist: () => {
     const data = localStorage.getItem(CURRENT_PLAYLIST_KEY);
-    return data ? JSON.parse(data) : null;
+    if (data) {
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        console.error("Error parsing current playlist:", error);
+      }
+    }
+    // Return default empty playlist if nothing is saved
+    return {
+      name: "New Playlist",
+      tracks: [],
+      timestamp: new Date().toISOString(),
+    };
   },
 
   // Clear current playlist

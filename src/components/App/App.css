@@ -110,14 +110,14 @@
 /* Contenedor de contenido (SearchBar + Content) */
 .app-container {
   padding: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 120px; /* Space for fixed player bar on desktop */
   transition: padding-bottom 0.3s ease;
 }
 
 @media (max-width: 768px) {
   .app-container {
     padding: 0.75rem;
-    padding-bottom: 1rem;
+    padding-bottom: 90px; /* Space for fixed player bar on mobile */
   }
 }
 
@@ -217,10 +217,51 @@
   gap: 2rem;                        /* Espacio entre elementos */
   align-items: flex-start;          /* Alinear desde arriba */
 }
-
 /* Mobile floating button - hidden by default on desktop */
 .mobile-create-playlist-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #00C864, #009650);
+  border: 2px solid #00FF99;
+  border-radius: 50%;
+  color: #00FF99;
+  font-size: 2rem;
+  font-weight: 300;
+  cursor: pointer;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 200, 100, 0.8), inset 0 0 15px rgba(0, 255, 200, 0.3);
+  transition: all 0.3s ease;
   display: none !important;
+}
+
+.mobile-create-playlist-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 200, 100, 0.8), rgba(0, 150, 100, 0.8));
+  box-shadow: 0 0 30px rgba(0, 200, 100, 0.7);
+  transform: scale(1.1);
+}
+
+.mobile-create-playlist-btn:active {
+  transform: scale(0.95);
+}
+
+/* Your Playlists Mobile Button - Desktop hidden */
+.your-playlists-mobile-btn {
+  display: none;
+}
+
+
+
+/* Desktop-only styles */
+@media (min-width: 769px) {
+  .new-playlist-btn {
+    display: none !important;
+  }
 }
 
 /* Para pantallas pequeñas */
@@ -272,7 +313,7 @@
 
   /* Ocultar Playlist sidebar en móvil */
   .Playlist {
-    display: none;
+    display: none !important;
   }
 
   /* SearchResults tomar ancho completo en móvil */
@@ -287,34 +328,29 @@
 
   /* Mobile floating button - visible only on mobile */
   .mobile-create-playlist-btn {
-    display: flex;
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, rgba(0, 200, 100, 0.6), rgba(0, 150, 100, 0.6));
-    border: 2px solid #00FF99;
-    border-radius: 50%;
+    display: flex !important;
+  }
+
+  /* Your Playlists button - visible on mobile */
+  .your-playlists-mobile-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(0, 200, 100, 0.1);
+    border: 1px solid rgba(0, 200, 100, 0.4);
     color: #00FF99;
-    font-size: 2rem;
-    font-weight: 300;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px rgba(0, 200, 100, 0.4);
     transition: all 0.3s ease;
   }
 
-  .mobile-create-playlist-btn:hover {
-    background: linear-gradient(135deg, rgba(0, 200, 100, 0.8), rgba(0, 150, 100, 0.8));
-    box-shadow: 0 0 30px rgba(0, 200, 100, 0.7);
-    transform: scale(1.1);
-  }
-
-  .mobile-create-playlist-btn:active {
-    transform: scale(0.95);
+  .your-playlists-mobile-btn:active {
+    background: rgba(0, 200, 100, 0.2);
+    transform: scale(0.98);
   }
 }
 

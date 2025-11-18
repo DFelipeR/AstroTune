@@ -16,6 +16,7 @@
     max-height: none;
     padding: 0.75rem;
     border-radius: 6px;
+    display: none !important;
   }
 }
 

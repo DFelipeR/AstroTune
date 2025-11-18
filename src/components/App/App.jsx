@@ -5,12 +5,13 @@ import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 import PlaylistPanel from "../PlaylistPanel/PlaylistPanel";
 import PlaylistCreator from "../PlaylistCreator/PlaylistCreator";
-import AudioPlayer from "../AudioPlayer/AudioPlayer";
-import Visualizer from "../Visualizer/Visualizer";
+import MusicPlayerModal from "../MusicPlayerModal/MusicPlayerModal";
 import TrackModal from "../TrackModal/TrackModal";
 import PlaylistViewModal from "../PlaylistViewModal/PlaylistViewModal";
+import DebugPanel from "../DebugPanel/DebugPanel";
+import CategoryFilter from "../CategoryFilter/CategoryFilter";
 import Spotify from "../../util/Spotify";
-import { mockTracks } from "../../data/mockTracks";
+import { mockTracks, categories } from "../../data/mockTracks";
 import playlistStorage from "../../util/playlistStorage";
 
 class App extends React.Component {
@@ -29,7 +30,9 @@ class App extends React.Component {
       selectedPlaylistName: null,
       playlistPanelOpen: false,
       playlistCreatorOpen: false,
+      isPlayerModalOpen: false,
       useLocalStorage: true, // Use local storage instead of Spotify
+      activeCategory: "All", // Active category filter
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -49,20 +52,17 @@ class App extends React.Component {
     this.playPrevTrack = this.playPrevTrack.bind(this);
     this.showPlaylistModal = this.showPlaylistModal.bind(this);
     this.closePlaylistModal = this.closePlaylistModal.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
   componentDidMount() {
-    // Load saved playlists from localStorage
+    // Load current playlist from localStorage
+    const { name, tracks } = playlistStorage.getCurrentPlaylist();
+    this.setState({
+      playlistName: name,
+      playlistTracks: tracks,
+    });
     this.updateSavedPlaylists();
-
-    // Load last edited playlist if exists
-    const currentPlaylist = playlistStorage.getCurrentPlaylist();
-    if (currentPlaylist) {
-      this.setState({
-        playlistName: currentPlaylist.name,
-        playlistTracks: currentPlaylist.tracks,
-      });
-    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -95,7 +95,11 @@ class App extends React.Component {
   }
 
   playTrack(track) {
-    this.setState({ currentTrack: track, isPlaying: true });
+    this.setState({
+      currentTrack: track,
+      isPlaying: true,
+      isPlayerModalOpen: true, // Auto-open modal when clicking play (desktop & mobile)
+    });
   }
 
   stopTrack() {
@@ -127,14 +131,24 @@ class App extends React.Component {
   }
 
   search(term) {
-    // Filtrar las canciones mock por término de búsqueda
+    const { activeCategory } = this.state;
+
+    // First filter by category
+    let tracksToSearch = mockTracks;
+    if (activeCategory !== "All") {
+      tracksToSearch = mockTracks.filter(
+        (track) => track.category === activeCategory
+      );
+    }
+
+    // Then filter by search term
     if (term.trim() === "") {
-      this.setState({ searchResults: mockTracks });
+      this.setState({ searchResults: tracksToSearch });
       return;
     }
 
     const searchTerm = term.toLowerCase();
-    const filtered = mockTracks.filter((track) => {
+    const filtered = tracksToSearch.filter((track) => {
       return (
         track.name.toLowerCase().includes(searchTerm) ||
         track.artist.toLowerCase().includes(searchTerm) ||
@@ -143,6 +157,13 @@ class App extends React.Component {
     });
 
     this.setState({ searchResults: filtered });
+  }
+
+  handleCategoryChange(category) {
+    this.setState({ activeCategory: category }, () => {
+      // Re-run search with new category
+      this.search("");
+    });
   }
 
   savePlaylist() {
@@ -273,6 +294,14 @@ class App extends React.Component {
     this.setState({ playlistCreatorOpen: false });
   }
 
+  openPlayerModal() {
+    this.setState({ isPlayerModalOpen: true });
+  }
+
+  closePlayerModal() {
+    this.setState({ isPlayerModalOpen: false });
+  }
+
   addTrackToPlaylist(track) {
     const { playlistTracks } = this.state;
     if (!playlistTracks.find((t) => t.id === track.id)) {
@@ -302,20 +331,25 @@ class App extends React.Component {
           <p>Your cyberpunk playlist manager</p>
         </div>
 
-        <div className="player-visualizer-container">
-          {this.state.currentTrack && (
-            <Visualizer
-              audioRef={this.audioRef}
-              currentTrack={this.state.currentTrack}
-              isPlaying={this.state.isPlaying}
-              onPlayPause={this.togglePlayPause}
-              volume={this.state.volume}
-              onVolumeChange={this.handleVolumeChange}
-              onNextTrack={this.playNextTrack}
-              onPrevTrack={this.playPrevTrack}
-            />
-          )}
-        </div>
+        {/* Visualizer removed - using MusicPlayerBar instead */}
+
+        {/* Hide player bar when playlist modal is open */}
+        {!this.state.selectedPlaylistName && (
+          <MusicPlayerModal
+            track={this.state.currentTrack}
+            onClose={this.stopTrack}
+            audioRef={this.audioRef}
+            isPlaying={this.state.isPlaying}
+            onPlayPause={this.togglePlayPause}
+            volume={this.state.volume}
+            onVolumeChange={this.handleVolumeChange}
+            onNextTrack={this.playNextTrack}
+            onPrevTrack={this.playPrevTrack}
+            isModalOpen={this.state.isPlayerModalOpen}
+            onOpenModal={this.openPlayerModal.bind(this)}
+            onCloseModal={this.closePlayerModal.bind(this)}
+          />
+        )}
 
         {/* Mobile floating button for creating playlists */}
         <button
@@ -327,6 +361,23 @@ class App extends React.Component {
 
         <div className="app-container">
           <SearchBar onSearch={this.search} />
+
+          {/* Category Filter */}
+          <CategoryFilter
+            categories={categories}
+            activeCategory={this.state.activeCategory}
+            onCategoryChange={this.handleCategoryChange}
+          />
+
+          {/* Your Playlists Button - Mobile Only */}
+          {this.state.savedPlaylists.length > 0 && (
+            <button
+              className="your-playlists-mobile-btn"
+              onClick={() => this.setState({ playlistPanelOpen: true })}
+            >
+              Your Playlists ({this.state.savedPlaylists.length})
+            </button>
+          )}
 
           {this.state.savedPlaylists.length > 0 && (
             <div className="saved-playlists">
@@ -386,7 +437,7 @@ class App extends React.Component {
             onSave={this.savePlaylist}
             onPlay={this.playTrack}
             onShowModal={this.showTrackModal}
-            onClose={this.closePlaylistPanel}
+            onClose={this.closePlaylistPanel.bind(this)}
             savedPlaylists={this.state.savedPlaylists}
             onNewPlaylist={this.newPlaylist}
             onShowPlaylist={this.showPlaylistModal}
@@ -430,6 +481,8 @@ class App extends React.Component {
           onPlay={this.playTrack}
           onShowModal={this.showTrackModal}
         />
+
+        {/* <DebugPanel /> */}
       </div>
     );
   }

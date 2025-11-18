@@ -81,6 +81,11 @@ const Spotify = {
             artist: track.artists[0].name,
             album: track.album.name,
             uri: track.uri,
+            // Agregar la imagen del álbum - tomar la primera (más grande)
+            imageUrl:
+              track.album.images[0]?.url || "https://via.placeholder.com/300",
+            // Agregar preview URL si está disponible
+            previewUrl: track.preview_url,
           }));
         })
     );

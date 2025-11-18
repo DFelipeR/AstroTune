@@ -3,11 +3,8 @@ import "./TrackModal.css";
 
 const TrackModal = ({ track, isOpen, onClose, onPlay }) => {
   if (!isOpen || !track) {
-    console.log("Modal no se abre:", { isOpen, track });
     return null;
   }
-
-  console.log("Modal renderizado:", track);
 
   return (
     <div className="track-modal-overlay" onClick={onClose}>
@@ -17,7 +14,11 @@ const TrackModal = ({ track, isOpen, onClose, onPlay }) => {
         </button>
 
         <div className="modal-album-art">
-          <div className="album-icon">♪</div>
+          {track.imageUrl ? (
+            <img src={track.imageUrl} alt={track.album} />
+          ) : (
+            <div className="album-icon">♪</div>
+          )}
         </div>
 
         <div className="modal-content">
@@ -27,7 +28,10 @@ const TrackModal = ({ track, isOpen, onClose, onPlay }) => {
 
           <div className="modal-duration">
             <span className="duration-label">Duration:</span>
-            <span className="duration-value">3:00</span>
+            <span className="duration-value">
+              {Math.floor(track.duration / 60)}:
+              {String(track.duration % 60).padStart(2, "0")}
+            </span>
           </div>
 
           <button

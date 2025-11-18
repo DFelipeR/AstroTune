@@ -1,0 +1,209 @@
+/* Debug Panel */
+.DebugPanel {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 9999;
+  font-family: "Courier New", monospace;
+}
+
+.DebugPanel-toggle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 255, 255, 0.2);
+  border: 2px solid rgba(0, 255, 255, 0.8);
+  color: #00FFFF;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.DebugPanel-toggle:hover {
+  background: rgba(0, 255, 255, 0.4);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.DebugPanel-content {
+  position: fixed;
+  bottom: 140px;
+  right: 20px;
+  width: 600px;
+  max-height: 500px;
+  background: linear-gradient(135deg, #0A0A1F 0%, #1a1a3f 50%, #2d1b4e 100%);
+  border: 2px solid rgba(0, 255, 255, 0.6);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1);
+  overflow-y: auto;
+  z-index: 9999;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.DebugPanel-content h3 {
+  color: #00FFFF;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.DebugPanel-count {
+  color: #94a3b8;
+  font-size: 12px;
+  margin: 0 0 15px 0;
+  padding: 8px;
+  background: rgba(0, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.DebugPanel-list {
+  max-height: 350px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.DebugPanel-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.DebugPanel-table thead {
+  position: sticky;
+  top: 0;
+  background: rgba(0, 255, 255, 0.15);
+}
+
+.DebugPanel-table th {
+  color: #00FFFF;
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  font-weight: bold;
+}
+
+.DebugPanel-table td {
+  color: #94a3b8;
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.DebugPanel-table tbody tr:hover {
+  background: rgba(0, 255, 255, 0.08);
+}
+
+.DebugPanel-url code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: #00FFFF;
+  word-break: break-all;
+  font-size: 10px;
+}
+
+.DebugPanel-empty {
+  color: #FF6B9D;
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+.DebugPanel-error {
+  color: #FF1493;
+  text-align: center;
+  padding: 15px;
+  background: rgba(255, 20, 147, 0.1);
+  border-radius: 5px;
+  font-size: 12px;
+  margin: 10px 0;
+  border: 1px solid rgba(255, 20, 147, 0.3);
+}
+
+.DebugPanel-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.DebugPanel-btn {
+  flex: 1;
+  background: rgba(0, 255, 255, 0.15);
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  color: #00FFFF;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Courier New", monospace;
+}
+
+.DebugPanel-btn:hover {
+  background: rgba(0, 255, 255, 0.25);
+  border-color: rgba(0, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.DebugPanel-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #FF6B9D;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.DebugPanel-close:hover {
+  color: #FF1493;
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .DebugPanel-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    bottom: 70px;
+  }
+
+  .DebugPanel-content {
+    width: calc(100vw - 40px);
+    bottom: 110px;
+    max-height: 300px;
+  }
+
+  .DebugPanel-table {
+    font-size: 9px;
+  }
+
+  .DebugPanel-table th,
+  .DebugPanel-table td {
+    padding: 4px;
+  }
+}
