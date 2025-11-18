@@ -327,8 +327,7 @@ Este proyecto está bajo la licencia **MIT**. Ver el archivo `LICENSE` para más
 **DFelipeR**
 
 - GitHub: [@DFelipeR](https://github.com/DFelipeR)
-- LinkedIn: [Felipe Rodriguez](https://linkedin.com/in/dfeliper)
-- Portafolio: [dfeliper.dev](https://dfeliper.dev)
+- LinkedIn: [Daniel Felipe Ramírez Caro]([https://linkedin.com/in/dfeliper](https://www.linkedin.com/in/dframirezcaro))
 
 ---
 
