@@ -155,20 +155,32 @@
 }
 
 @media (max-width: 768px) {
+  .playlist-panel-overlay {
+    z-index: 6000 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+
   .playlist-panel {
-    max-width: 100%;
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 100dvh !important;
+    height: 100dvh !important;
+    border-radius: 0 !important;
+    border: 2px solid rgba(0, 255, 255, 0.3);
   }
 
   .playlist-panel-header {
-    padding: 1rem;
+    padding: 2rem 1.5rem 1rem;
   }
 
   .playlist-panel-header h2 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   .playlist-panel-content {
-    padding: 1rem;
-    gap: 0.8rem;
+    padding: 1.5rem;
+    gap: 1rem;
   }
 }

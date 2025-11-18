@@ -7,7 +7,7 @@ const SearchBar = (props) => {
   const handleTermChange = (event) => {
     const value = event.target.value;
     setTerm(value);
-    // Búsqueda en tiempo real
+    // Real-time search
     props.onSearch(value);
   };
 

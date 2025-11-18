@@ -1,48 +1,48 @@
 // ============================================
-// VARIABLES GLOBALES
+// GLOBAL VARIABLES
 // ============================================
 let accessToken = "";
 
-// Tu Client ID de Spotify (registrado en developer.spotify.com)
+// Your Spotify Client ID (registered at developer.spotify.com)
 const clientId = "8bec3d7dff78460baabcb77239be6cc1";
 const redirectUri = "https://astrotune-music.surge.sh/";
 
 // ============================================
-// OBJETO SPOTIFY CON LOS 3 MÉTODOS
+// SPOTIFY OBJECT WITH 3 METHODS
 // ============================================
 const Spotify = {
   /**
-   * MÉTODO 1: Obtener el token de acceso del usuario
-   * - Si ya tiene token, devolverlo
-   * - Si está en la URL, extraerlo
-   * - Si no existe, redirigir a Spotify para que autorice
+   * METHOD 1: Get user access token
+   * - If already has token, return it
+   * - If it's in the URL, extract it
+   * - If it doesn't exist, redirect to Spotify for authorization
    */
   getAccessToken() {
-    // Paso 1: ¿Ya tenemos token guardado?
+    // Step 1: Do we already have a saved token?
     if (accessToken) {
       return accessToken;
     }
 
-    // Paso 2: Buscar token en la URL (después de que Spotify redirige)
-    // La URL se ve así: http://localhost:5173/#access_token=xxxxx&expires_in=3600
+    // Step 2: Search for token in URL (after Spotify redirects)
+    // URL looks like: http://localhost:5173/#access_token=xxxxx&expires_in=3600
     const accessTokenMatch = window.location.hash.match(/access_token=([^&]*)/);
     const expiresInMatch = window.location.hash.match(/expires_in=([^&]*)/);
     if (accessTokenMatch && expiresInMatch) {
-      // Sí, extraer el token
+      // Yes, extract the token
       accessToken = accessTokenMatch[1];
       const expiresIn = Number(expiresInMatch[1]);
 
-      // Establecer un temporizador para limpiar el token cuando expire
+      // Set a timer to clear the token when it expires
       window.setTimeout(() => {
         accessToken = "";
       }, expiresIn * 1000);
 
-      // Limpiar la URL para que no muestre el token
+      // Clean the URL so it doesn't show the token
       window.history.pushState("Access Token", null, "/");
 
       return accessToken;
     } else {
-      // Paso 4: No hay token, redirigir a Spotify para autenticación
+      // Step 4: No token, redirect to Spotify for authentication
       const scope = "playlist-modify-public";
       const redirectUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=${encodeURIComponent(
         scope
@@ -52,39 +52,39 @@ const Spotify = {
   },
 
   /**
-   * MÉTODO 2: Buscar canciones en Spotify
-   * Parámetro: term (ej: "Neon Dreams")
-   * Retorna: Promise con array de canciones
+   * METHOD 2: Search songs in Spotify
+   * Parameter: term (e.g., "Neon Dreams")
+   * Returns: Promise with array of songs
    */
   search(term) {
     const accessToken = this.getAccessToken();
 
-    // Hacer petición GET a Spotify API
+    // Make GET request to Spotify API
     return (
       fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       })
-        // Convertir respuesta a JSON
+        // Convert response to JSON
         .then((response) => response.json())
-        // Mapear los resultados
+        // Map the results
         .then((jsonResponse) => {
           if (!jsonResponse.tracks) {
             return [];
           }
 
-          // Transformar los datos de Spotify a nuestro formato
+          // Transform Spotify data to our format
           return jsonResponse.tracks.items.map((track) => ({
             id: track.id,
             name: track.name,
             artist: track.artists[0].name,
             album: track.album.name,
             uri: track.uri,
-            // Agregar la imagen del álbum - tomar la primera (más grande)
+            // Add album image - take the first one (largest)
             imageUrl:
               track.album.images[0]?.url || "https://via.placeholder.com/300",
-            // Agregar preview URL si está disponible
+            // Add preview URL if available
             previewUrl: track.preview_url,
           }));
         })
@@ -92,13 +92,13 @@ const Spotify = {
   },
 
   /**
-   * MÉTODO 3: Guardar playlist en Spotify
-   * Parámetros:
-   *   - name: nombre de la playlist
-   *   - uris: array de track URIs
+   * METHOD 3: Save playlist to Spotify
+   * Parameters:
+   *   - name: playlist name
+   *   - uris: array of track URIs
    */
   savePlaylist(name, uris) {
-    // Validar que tenemos parámetros
+    // Validate that we have parameters
     if (!name || !uris.length) {
       return;
     }
@@ -111,14 +111,14 @@ const Spotify = {
 
     let userId;
 
-    // Paso 1: Obtener el ID del usuario
+    // Step 1: Get user ID
     return (
       fetch("https://api.spotify.com/v1/me", { headers: headers })
         .then((response) => response.json())
         .then((jsonResponse) => {
           userId = jsonResponse.id;
         })
-        // Paso 2: Crear una nueva playlist
+        // Step 2: Create a new playlist
         .then(() => {
           return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
             headers: headers,
@@ -130,7 +130,7 @@ const Spotify = {
         .then((jsonResponse) => {
           const playlistId = jsonResponse.id;
 
-          // Paso 3: Agregar canciones a la playlist
+          // Step 3: Add songs to the playlist
           return fetch(
             `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
             {
@@ -145,6 +145,6 @@ const Spotify = {
 };
 
 // ============================================
-// EXPORTAR EL OBJETO SPOTIFY
+// EXPORT THE SPOTIFY OBJECT
 // ============================================
 export default Spotify;
